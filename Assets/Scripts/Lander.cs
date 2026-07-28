@@ -1,19 +1,28 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System;
 public class Lander : MonoBehaviour
 {
+    // Emite un evento por cada tecla, el Lander visual escucha y prende alguna de las particulas del thruster correspondiente.
+    public event EventHandler OnUpForce;
+    public event EventHandler OnLeftForce;
+    public event EventHandler OnRightForce;
+    public event EventHandler OnBeforeForceApplied;
+
     private Rigidbody2D landerRigidbody2D;
-    private int rotationRate = 50;
-    private int accelerationRate = 1000;
-    private float softLandingVelocityMagitude = 3.5f; // Maxima velocidad permitida al aterrizar
-    private float minDotVector = 0.9f; // Minimo producto cartesiano entre el vector canonico y global y el transform.y del lander para considerar que esta vertical
+    [SerializeField] private int rotationRate = 50;
+    [SerializeField] private int accelerationRate = 1000;
+    [SerializeField] private float softLandingVelocityMagitude = 3.5f; // Maxima velocidad permitida al aterrizar
+    [SerializeField] private float minDotVector = 0.9f; // Minimo producto cartesiano entre el vector canonico y global y el transform.y del lander para considerar que esta vertical
+    [SerializeField] private float fuelAmount = 100f; // Cantidad de combustible inicial
+    [SerializeField] private float fuelConsumptionRate = 10f; // Cantidad de combustible consumido por segundo al aplicar fuerza
+    [SerializeField] private float maxFuelAmount = 120f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // Para referencias externas
     private void Start()
     {
-        Debug.Log("Lander script has started.");
+        Debug.Log("Lander script has started. Initial fuel is " + fuelAmount);
     }
 
     // Para referencias locales
@@ -31,24 +40,44 @@ public class Lander : MonoBehaviour
     // Otra ventaja de usar FixedUpdate es que no depedemos del framerate, por lo tanto si el framerate es bajo, no se vera afectado el movimiento del lander.
     private void FixedUpdate()
     {
+        OnBeforeForceApplied?.Invoke(this, EventArgs.Empty);
+
         // Al presionar la tecla de Up, se aplica una fuerza enn la direccion que esta apuntando el lander. (Vector2.up relativo al sprite, no global).
         // Para ello vamos a usar el componete Transform del lander, que nos permite obtener la direccion hacia donde esta apuntando el lander.
 
         /*
         •	Time.deltaTime: tiempo (en segundos) transcurrido desde el último frame — varía según la tasa de frames. Se usa en Update() para que el movimiento/animaciones sean independientes del framerate. Ej.: transform.Translate(velocidad * Time.deltaTime * Vector3.up);
         •	Time.fixedDeltaTime: intervalo fijo del motor de física (por defecto 0.02 s). Se usa en FixedUpdate() y en cálculos de física para mantener la simulación determinista y estable. Ej.: rb.MovePosition(rb.position + velocidad * Time.fixedDeltaTime);
-        */  
+        */
+        if (fuelAmount < 0)
+        {
+            // Podria emitir evento aca para largar humito o algo asi
+            Debug.Log("Out of fuel!");
+            return;
+        }
+        
+        Debug.Log("Fuel remaining: " + fuelAmount);
+
+        if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+        {
+            this.consumeFuel();
+        }
+
         if (Keyboard.current.upArrowKey.isPressed)
         {
             landerRigidbody2D.AddForce(accelerationRate * transform.up * Time.fixedDeltaTime);
+            OnUpForce?.Invoke(this, EventArgs.Empty);
+            
         }
         if (Keyboard.current.leftArrowKey.isPressed)
         {
             landerRigidbody2D.AddTorque(rotationRate * Time.fixedDeltaTime);
+            OnLeftForce?.Invoke(this, EventArgs.Empty);
         }
         if (Keyboard.current.rightArrowKey.isPressed)
         {
             landerRigidbody2D.AddTorque(-rotationRate * Time.fixedDeltaTime);
+            OnRightForce?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -79,4 +108,21 @@ public class Lander : MonoBehaviour
         Debug.Log("Score: " + score);
     }
 
+    private void consumeFuel()
+    {
+        if (fuelAmount > 0)
+        {
+            fuelAmount -= fuelConsumptionRate * Time.fixedDeltaTime;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.TryGetComponent<Fuel>(out Fuel fuel))
+        {
+            this.fuelAmount = Math.Min(this.maxFuelAmount, this.fuelAmount + fuel.getFuelAmount());
+            Debug.Log("Fuel collected! New fuel level: " + this.fuelAmount);
+            fuel.getConsumed();
+        }
+    }
 }

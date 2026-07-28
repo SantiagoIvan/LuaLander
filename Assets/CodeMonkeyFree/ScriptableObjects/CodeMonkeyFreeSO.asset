@@ -14,22 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1785084262
+  lastShownTimestamp: 1785174109
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1785084262
+  checkedLastUpdateTimestamp: 1785174109
   lastQOTDResponse:
-    questionId: 325
-    questionText: 'Is this valid code?
+    questionId: 326
+    questionText: 'What are the minimum requirements (array size) to draw a Mesh
+      Quad?
 
-      <p>Color? myColor = null;</p>'
-    answerA: Yes
-    answerB: No, myColor is a struct and cannot be null
-    answerC: 
+      <p>Mesh mesh = new Mesh();</p>
+
+      <p>mesh.vertices = ???</p>
+
+      <p>mesh.uv
+      = ???</p>
+
+      <p>mesh.triangles = ???</p>'
+    answerA: 4 vertices, 4 uvs, 2 triangles
+    answerB: 4 vertices, 4 uvs, 6 triangles
+    answerC: 6 vertices, 3 uvs, 4 triangles
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1785084262
+  lastQotdTimestamp: 1785174109
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
     topText: Get 80% OFF on ALL my Courses and Games!!!
@@ -37,11 +45,11 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1785084262
+  lastDynamicHeaderTimestamp: 1785174109
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1785084262
+  websiteLatestMessageTimestamp: 1785174109
   websiteLatestVideos:
     videos:
     - youTubeId: _0Lp-iXEhfU
@@ -52,4 +60,4 @@ MonoBehaviour:
       title: TOP 10 FREE NEW Assets JULY 2026!
     - youTubeId: IQlMciGDMTY
       title: This method helps you find Game Ideas that make MILLIONS!
-  websiteLatestVideosTimestamp: 1785084262
+  websiteLatestVideosTimestamp: 1785174109
