@@ -3,6 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private int score = 0;
+    [SerializeField] private float time = 0f;
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -36,5 +38,9 @@ public class GameManager : MonoBehaviour
     {
         // Sumar al score el puntaje del landing exitoso
         this.addScore(landing.score);
+    }
+    public float getTime()
+    {
+        return this.time;
     }
 }

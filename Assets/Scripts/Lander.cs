@@ -77,7 +77,6 @@ public class Lander : MonoBehaviour
         if (fuelAmount < 0)
         {
             // Podria emitir evento aca para largar humito o algo asi
-            Debug.Log("Out of fuel!");
             return;
         }
         
@@ -138,6 +137,9 @@ public class Lander : MonoBehaviour
         if (fuelAmount > 0)
         {
             fuelAmount -= fuelConsumptionRate * Time.fixedDeltaTime;
+        } else
+        {
+            Debug.Log("Out of fuel!");
         }
     }
 
@@ -156,5 +158,23 @@ public class Lander : MonoBehaviour
             OnCoinCollected?.Invoke(this, new CoinCollectedEventArgs(coin.getValue())); // O puedo directamente hablarle al gamemanager para que sume puntos.
             coin.getCollected();
         }
+    }
+
+    public float getFuelAmount()
+    {
+        return this.fuelAmount;
+    }
+
+    public float getSpeedX()
+    {
+        return this.landerRigidbody2D.linearVelocity.x;
+    }
+    public float getSpeedY()
+    {
+        return this.landerRigidbody2D.linearVelocity.y;
+    }
+    public float getMaxFuelAmount()
+    {
+        return this.maxFuelAmount;
     }
 }
