@@ -30,6 +30,7 @@ public class LandedUI : MonoBehaviour
         else
         {
             title.text = "Landing Failed!";
+            title.color = new Color(205f / 255f, 34f / 255f, 34f / 255f, 1f); // #CD2222 in Unity's Color format
         }
         landingSpeed.text = landing.landingSpeed.ToString("F2");
         landingAngle.text = landing.landingAngle.ToString("F2");
