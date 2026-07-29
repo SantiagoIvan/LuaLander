@@ -24,14 +24,21 @@ public class Lander : MonoBehaviour
     public event EventHandler<CoinCollectedEventArgs> OnCoinCollected;
 
     // Para el landing exitoso
-    public event EventHandler<OnSuccessfulLandingEventArgs> OnSuccessfulLanding;
-    public class OnSuccessfulLandingEventArgs : CoinCollectedEventArgs
+    public enum LandingResult
     {
-        public int score;
-        public OnSuccessfulLandingEventArgs(int score) : base(0)
-        {
-            this.score = score;
-        }
+        Success,
+        WrongLandingArea,
+        TooSteepLanding,
+        TooFastLanding
+    }
+    public event EventHandler<OnLandingEventArgs> OnLanding;
+    public class OnLandingEventArgs : EventArgs
+    {
+        public LandingResult landingResult;
+        public float landingSpeed;
+        public float landingAngle;
+        public int multiplier;
+        public int finalScore;
     }
 
     private Rigidbody2D landerRigidbody2D;
@@ -106,21 +113,26 @@ public class Lander : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D targetCollision)
     {
-        // Para saber si aterrizamos sobre un LandingPad, necesitamos analizar el TIPO del objeto, la velocidad y el angulo
-        // Podemos decir que estalla si lo que choco NO FUE UN LANDING PAD o si la velocidad fue mayor a la permitida.
-        if(!targetCollision.gameObject.TryGetComponent(out LandingPad landingPad) || 
-            targetCollision.relativeVelocity.magnitude > softLandingVelocityMagitude)
-        {
-            Debug.Log("Lander has crashed!");
-            return;
-        }
-
         // Analizo si el lander esta vertical con producto cartesiano entre el vector canonico global y el transform.y del lander
         // Si da 1, el lander esta vertical, si da 0, esta perpendicular. Trabaja con vectores unitarios, por lo tanto el producto cartesiano es el coseno del angulo entre ambos vectores.
         float dotProduct = Vector2.Dot(Vector2.up, transform.up);
-        if(!(dotProduct > minDotVector))
+            
+        // Para saber si aterrizamos sobre un LandingPad, necesitamos analizar el TIPO del objeto, la velocidad y el angulo
+        // Podemos decir que estalla si lo que choco NO FUE UN LANDING PAD o si la velocidad fue mayor a la permitida.
+        if (!targetCollision.gameObject.TryGetComponent(out LandingPad landingPad))
         {
-            Debug.Log("Lander is not vertical. Landing failed.");
+            this.failLanding(LandingResult.WrongLandingArea);
+            return;
+        }
+        if(targetCollision.relativeVelocity.magnitude > softLandingVelocityMagitude)
+        {
+            this.failLanding(LandingResult.TooFastLanding);
+            return;
+        }
+
+        if (!(dotProduct > minDotVector))
+        {
+            this.failLanding(LandingResult.TooSteepLanding);
             return;
         }
         
@@ -129,7 +141,18 @@ public class Lander : MonoBehaviour
         // Para el score voy a usar tanto la incliacion como la velocidad y las voy a promediar. Cuanto mas cerca esten del limite, menos peso tendra
         float landingScore = ScoreCalculator.getScore(targetCollision.relativeVelocity.magnitude, dotProduct, softLandingVelocityMagitude, minDotVector, landingPad.getLanderMultiplier());
         Debug.Log("Score: " + landingScore);
-        OnSuccessfulLanding?.Invoke(this, new OnSuccessfulLandingEventArgs((int)landingScore));
+        GameManager.Instance.landed(landingScore);
+        OnLanding?.Invoke
+            (this, 
+                new OnLandingEventArgs
+                {
+                    landingResult = LandingResult.Success,
+                    landingSpeed = targetCollision.relativeVelocity.magnitude,
+                    landingAngle = dotProduct,
+                    multiplier = landingPad.getLanderMultiplier(),
+                    finalScore = GameManager.Instance.getScore()
+                }
+            );
     }
 
     private void consumeFuel()
@@ -176,5 +199,22 @@ public class Lander : MonoBehaviour
     public float getMaxFuelAmount()
     {
         return this.maxFuelAmount;
+    }
+    private void failLanding(LandingResult result)
+    {
+        Debug.Log("Lander has crashed!");
+        GameManager.Instance.failLanding();
+        OnLanding?.Invoke
+        (this,
+            new OnLandingEventArgs
+            {
+                landingResult = result,
+                landingSpeed = 0,
+                landingAngle = 0,
+                multiplier = 0,
+                finalScore = 0
+            }
+        );
+        return;
     }
 }

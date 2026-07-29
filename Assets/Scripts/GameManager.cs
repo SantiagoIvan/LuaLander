@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Lander.Instance.OnCoinCollected += Lander_OnCoinCollected;
-        Lander.Instance.OnSuccessfulLanding += Lander_OnSuccessfulLanding;
     }
 
     public int getScore()
@@ -34,10 +33,14 @@ public class GameManager : MonoBehaviour
         this.addScore(coin.coinValue);
     }
 
-    private void Lander_OnSuccessfulLanding(object sender, Lander.OnSuccessfulLandingEventArgs landing)
+    public void landed(float landingScore)
     {
         // Sumar al score el puntaje del landing exitoso
-        this.addScore(landing.score);
+        this.addScore((int)(landingScore + this.time));
+    }
+    public void failLanding()
+    {
+        this.score = 0;
     }
     public float getTime()
     {
