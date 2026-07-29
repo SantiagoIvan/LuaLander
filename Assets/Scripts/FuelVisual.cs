@@ -6,6 +6,7 @@ public class FuelVisual : MonoBehaviour
 {
     [SerializeField] private TextMeshPro fuelAmountIndicator;
     [SerializeField] private Fuel fuel;
+    [SerializeField] private ParticleSystem pickUpEffect;
 
     private void Awake()
     {
@@ -18,6 +19,10 @@ public class FuelVisual : MonoBehaviour
 
     private void Fuel_GetConsumed(object sender, EventArgs e)
     {
-        Debug.Log("Fuel consumption animation triggered.");
+        Debug.Log("Fuel consumption animation triggered. Falta animacion y sonidito.");
+        if (pickUpEffect != null)
+        {
+            // Hacer la animacion de las particulas
+        }
     }
 }

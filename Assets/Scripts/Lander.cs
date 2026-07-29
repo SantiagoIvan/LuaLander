@@ -3,11 +3,36 @@ using UnityEngine.InputSystem;
 using System;
 public class Lander : MonoBehaviour
 {
+    // Singleton
+    public static Lander Instance { get; private set; }
+
     // Emite un evento por cada tecla, el Lander visual escucha y prende alguna de las particulas del thruster correspondiente.
     public event EventHandler OnUpForce;
     public event EventHandler OnLeftForce;
     public event EventHandler OnRightForce;
     public event EventHandler OnBeforeForceApplied;
+
+    // Para las monedas
+    public class CoinCollectedEventArgs : EventArgs
+    {
+        public int coinValue;
+        public CoinCollectedEventArgs(int value)
+        {
+            coinValue = value;
+        }
+    }
+    public event EventHandler<CoinCollectedEventArgs> OnCoinCollected;
+
+    // Para el landing exitoso
+    public event EventHandler<OnSuccessfulLandingEventArgs> OnSuccessfulLanding;
+    public class OnSuccessfulLandingEventArgs : CoinCollectedEventArgs
+    {
+        public int score;
+        public OnSuccessfulLandingEventArgs(int score) : base(0)
+        {
+            this.score = score;
+        }
+    }
 
     private Rigidbody2D landerRigidbody2D;
     [SerializeField] private int rotationRate = 50;
@@ -28,8 +53,8 @@ public class Lander : MonoBehaviour
     // Para referencias locales
     private void Awake()
     {
-        Debug.Log("Lander script has awakened.");
         landerRigidbody2D = GetComponent<Rigidbody2D>();
+        Instance = this;
     }
 
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
@@ -56,7 +81,6 @@ public class Lander : MonoBehaviour
             return;
         }
         
-        Debug.Log("Fuel remaining: " + fuelAmount);
 
         if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
@@ -104,8 +128,9 @@ public class Lander : MonoBehaviour
         Debug.Log("Successful landing! Calculating score...");
 
         // Para el score voy a usar tanto la incliacion como la velocidad y las voy a promediar. Cuanto mas cerca esten del limite, menos peso tendra
-        float score = ScoreCalculator.getScore(targetCollision.relativeVelocity.magnitude, dotProduct, softLandingVelocityMagitude, minDotVector, landingPad.getLanderMultiplier());
-        Debug.Log("Score: " + score);
+        float landingScore = ScoreCalculator.getScore(targetCollision.relativeVelocity.magnitude, dotProduct, softLandingVelocityMagitude, minDotVector, landingPad.getLanderMultiplier());
+        Debug.Log("Score: " + landingScore);
+        OnSuccessfulLanding?.Invoke(this, new OnSuccessfulLandingEventArgs((int)landingScore));
     }
 
     private void consumeFuel()
@@ -123,6 +148,13 @@ public class Lander : MonoBehaviour
             this.fuelAmount = Math.Min(this.maxFuelAmount, this.fuelAmount + fuel.getFuelAmount());
             Debug.Log("Fuel collected! New fuel level: " + this.fuelAmount);
             fuel.getConsumed();
+        }
+        if (other.gameObject.TryGetComponent<Coin>(out Coin coin))
+        {
+            Debug.Log("Coin collected!");
+            // You can add coin collection logic here
+            OnCoinCollected?.Invoke(this, new CoinCollectedEventArgs(coin.getValue())); // O puedo directamente hablarle al gamemanager para que sume puntos.
+            coin.getCollected();
         }
     }
 }

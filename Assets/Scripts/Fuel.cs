@@ -14,6 +14,6 @@ public class Fuel : MonoBehaviour
     public void getConsumed()
     {
         OnFuelConsumed?.Invoke(this, EventArgs.Empty);
-        Destroy(gameObject);
+        Destroy(gameObject); //Si lo destruyo aca, la animacion nunca sucede. Debo destruirlo al finalizar la animacion.
     }
 }

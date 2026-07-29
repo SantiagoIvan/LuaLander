@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FuelVisual
   fuelAmountIndicator: {fileID: 3358082228773060400}
   fuel: {fileID: 3988686813301275794}
+  pickUpEffect: {fileID: 0}
 --- !u!61 &7575308720331217948
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1785174109
+  lastShownTimestamp: 1785269156
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1785174109
+  checkedLastUpdateTimestamp: 1785269156
   lastQOTDResponse:
     questionId: 326
     questionText: 'What are the minimum requirements (array size) to draw a Mesh
@@ -37,7 +37,7 @@ MonoBehaviour:
     answerC: 6 vertices, 3 uvs, 4 triangles
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1785174109
+  lastQotdTimestamp: 1785269156
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
     topText: Get 80% OFF on ALL my Courses and Games!!!
@@ -45,19 +45,19 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1785174109
+  lastDynamicHeaderTimestamp: 1785269156
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1785174109
+  websiteLatestMessageTimestamp: 1785269156
   websiteLatestVideos:
     videos:
+    - youTubeId: f0BSrBhudoY
+      title: TOP 10 NEW Systems and Tools JULY 2026! | Unity Asset Store
     - youTubeId: _0Lp-iXEhfU
       title: Join my Game Dev Practice Lab for FREE!
     - youTubeId: 2dyD9yWWtCU
       title: Unity 7 is RE-ANNOUNCED!
     - youTubeId: -qpKrATW4wM
       title: TOP 10 FREE NEW Assets JULY 2026!
-    - youTubeId: IQlMciGDMTY
-      title: This method helps you find Game Ideas that make MILLIONS!
-  websiteLatestVideosTimestamp: 1785174109
+  websiteLatestVideosTimestamp: 1785269156
