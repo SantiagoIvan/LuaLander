@@ -6,6 +6,8 @@ public class Lander : MonoBehaviour
     // Singleton
     public static Lander Instance { get; private set; }
 
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
+
     // Emite un evento por cada tecla, el Lander visual escucha y prende alguna de las particulas del thruster correspondiente.
     public event EventHandler OnUpForce;
     public event EventHandler OnLeftForce;
@@ -26,6 +28,17 @@ public class Lander : MonoBehaviour
     [SerializeField] private float fuelConsumptionRate = 10f; // Cantidad de combustible consumido por segundo al aplicar fuerza
     [SerializeField] private float maxFuelAmount = 120f;
     [SerializeField] private float NORMAL_GRAVITY_SCALE = 1f;
+    private State state;
+
+
+    // Para referencias locales
+    private void Awake()
+    {
+        landerRigidbody2D = GetComponent<Rigidbody2D>();
+        Instance = this;
+        landerRigidbody2D.gravityScale = 0f; // Para que empiece congelado el Lander hasta que uno toque una tecla de movimiento.
+        this.state = State.WaitingToStart;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // Para referencias externas
@@ -33,15 +46,6 @@ public class Lander : MonoBehaviour
     {
         Debug.Log("Lander script has started. Initial fuel is " + fuelAmount);
     }
-
-    // Para referencias locales
-    private void Awake()
-    {
-        landerRigidbody2D = GetComponent<Rigidbody2D>();
-        Instance = this;
-        landerRigidbody2D.gravityScale = 0f;
-    }
-
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     // No corre en cada update, sino en intervalos fijos de tiempo. Se recomienda usarlo para código de física.
     // Estamos analizando si la tecla esta siendo presionada (isPressed), por lo tanto podemos realizarlo en FixedUpdate.
@@ -59,34 +63,49 @@ public class Lander : MonoBehaviour
         •	Time.deltaTime: tiempo (en segundos) transcurrido desde el último frame — varía según la tasa de frames. Se usa en Update() para que el movimiento/animaciones sean independientes del framerate. Ej.: transform.Translate(velocidad * Time.deltaTime * Vector3.up);
         •	Time.fixedDeltaTime: intervalo fijo del motor de física (por defecto 0.02 s). Se usa en FixedUpdate() y en cálculos de física para mantener la simulación determinista y estable. Ej.: rb.MovePosition(rb.position + velocidad * Time.fixedDeltaTime);
         */
-        if (fuelAmount < 0)
-        {
-            // Podria emitir evento aca para largar humito o algo asi
-            return;
-        }
-        
 
-        if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-        {
-            this.consumeFuel();
-            this.landerRigidbody2D.gravityScale = NORMAL_GRAVITY_SCALE;
-        }
 
-        if (Keyboard.current.upArrowKey.isPressed)
+        switch (this.state)
         {
-            landerRigidbody2D.AddForce(accelerationRate * transform.up * Time.fixedDeltaTime);
-            OnUpForce?.Invoke(this, EventArgs.Empty);
-            
-        }
-        if (Keyboard.current.leftArrowKey.isPressed)
-        {
-            landerRigidbody2D.AddTorque(rotationRate * Time.fixedDeltaTime);
-            OnLeftForce?.Invoke(this, EventArgs.Empty);
-        }
-        if (Keyboard.current.rightArrowKey.isPressed)
-        {
-            landerRigidbody2D.AddTorque(-rotationRate * Time.fixedDeltaTime);
-            OnRightForce?.Invoke(this, EventArgs.Empty);
+            case State.WaitingToStart:
+                if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                {
+                    // Aca no consumo fiel porque al cambiar el estado, entra en el condicional de abajo y terminaria consumiendo 2 veces en un mismo frame.
+                    this.landerRigidbody2D.gravityScale = NORMAL_GRAVITY_SCALE;
+                    this.setState(State.Normal);
+                }
+                break;
+            case State.Normal:
+                if (fuelAmount < 0)
+                {
+                    // Podria emitir evento aca para largar humito o algo asi
+                    return;
+                }
+                if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                {
+                    this.consumeFuel();
+                }
+
+                if (Keyboard.current.upArrowKey.isPressed)
+                {
+                    landerRigidbody2D.AddForce(accelerationRate * transform.up * Time.fixedDeltaTime);
+                    OnUpForce?.Invoke(this, EventArgs.Empty);
+
+                }
+                if (Keyboard.current.leftArrowKey.isPressed)
+                {
+                    landerRigidbody2D.AddTorque(rotationRate * Time.fixedDeltaTime);
+                    OnLeftForce?.Invoke(this, EventArgs.Empty);
+                }
+                if (Keyboard.current.rightArrowKey.isPressed)
+                {
+                    landerRigidbody2D.AddTorque(-rotationRate * Time.fixedDeltaTime);
+                    OnRightForce?.Invoke(this, EventArgs.Empty);
+                }
+                break;
+            case State.GameOver:
+                break;
+
         }
     }
 
@@ -120,6 +139,7 @@ public class Lander : MonoBehaviour
         // Para el score voy a usar tanto la incliacion como la velocidad y las voy a promediar. Cuanto mas cerca esten del limite, menos peso tendra
         float landingScore = ScoreCalculator.getScore(targetCollision.relativeVelocity.magnitude, dotProduct, softLandingVelocityMagitude, minDotVector, landingPad.getLanderMultiplier());
         Debug.Log("Score: " + landingScore);
+        this.setState(State.GameOver);
         GameManager.Instance.landed(landingScore);
         OnLanding?.Invoke
             (this, 
@@ -183,6 +203,7 @@ public class Lander : MonoBehaviour
     {
         Debug.Log("Lander has crashed!");
         GameManager.Instance.failLanding();
+        this.setState(State.GameOver);
         OnLanding?.Invoke
         (this,
             new OnLandingEventArgs
@@ -195,5 +216,10 @@ public class Lander : MonoBehaviour
             }
         );
         return;
+    }
+    private void setState(State newState)
+    {
+        this.state = newState;
+        this.OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { newState= newState });
     }
 }

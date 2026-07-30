@@ -10,6 +10,7 @@ public class LanderVisual : MonoBehaviour
     [SerializeField] private ParticleSystem leftThrusterParticleSystem;
     [SerializeField] private ParticleSystem middleThrusterParticleSystem;
     [SerializeField] private ParticleSystem rightThrusterParticleSystem;
+    [SerializeField] private GameObject explosionVFX;
 
     private Lander lander; // tambien se puede hacer serializeField
     
@@ -22,12 +23,26 @@ public class LanderVisual : MonoBehaviour
         lander.OnLeftForce += Lander_OnLeftForce;
         lander.OnRightForce += Lander_OnRightForce;
         lander.OnBeforeForceApplied += Lander_OnBeforeForceApplied;
+        lander.OnLanding += Lander_OnLanding;
 
         setThrusterParticleSystem(leftThrusterParticleSystem, false);
         setThrusterParticleSystem(middleThrusterParticleSystem, false);
         setThrusterParticleSystem(rightThrusterParticleSystem, false);
     }
 
+    private void Lander_OnLanding(object sender, OnLandingEventArgs landingObj)
+    {
+        switch (landingObj.landingResult)
+        {
+            case LandingResult.WrongLandingArea:
+            case LandingResult.TooSteepLanding:
+            case LandingResult.TooFastLanding:
+                Instantiate(this.explosionVFX, transform.position, Quaternion.identity);
+                this.gameObject.SetActive(false);
+                break;
+        }
+
+    }
     private void setThrusterParticleSystem(ParticleSystem particleSystem, bool enabled)
     {
         ParticleSystem.EmissionModule emission = particleSystem.emission;

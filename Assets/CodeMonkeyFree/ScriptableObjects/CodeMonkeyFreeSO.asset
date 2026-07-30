@@ -14,30 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1785269156
+  lastShownTimestamp: 1785384032
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1785269156
+  checkedLastUpdateTimestamp: 1785384032
   lastQOTDResponse:
-    questionId: 326
-    questionText: 'What are the minimum requirements (array size) to draw a Mesh
-      Quad?
+    questionId: 327
+    questionText: 'When would this code cause an error?
 
-      <p>Mesh mesh = new Mesh();</p>
+      <p>Building closest
+      = null;</p>
 
-      <p>mesh.vertices = ???</p>
+      <p>for (int i = 0; i &lt; instanceList.Count; i++) {</p>
 
-      <p>mesh.uv
-      = ???</p>
+      <p>&nbsp;
+      &nbsp; if (Vector3.Distance(position, instanceList[i].GetPosition()) &lt; Vector3.Distance(position,
+      closest.GetPosition())) {</p>
 
-      <p>mesh.triangles = ???</p>'
-    answerA: 4 vertices, 4 uvs, 2 triangles
-    answerB: 4 vertices, 4 uvs, 6 triangles
-    answerC: 6 vertices, 3 uvs, 4 triangles
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; closest
+      = instanceList[i];</p>
+
+      <p>&nbsp; &nbsp; }</p>
+
+      <p>}</p>
+
+      <p>return
+      closest;</p>'
+    answerA: When instanceList is empty
+    answerB: When instanceList has at least one element
+    answerC: When instanceList has exactly two elements
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1785269156
+  lastQotdTimestamp: 1785384032
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
     topText: Get 80% OFF on ALL my Courses and Games!!!
@@ -45,11 +54,11 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1785269156
+  lastDynamicHeaderTimestamp: 1785384032
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1785269156
+  websiteLatestMessageTimestamp: 1785384032
   websiteLatestVideos:
     videos:
     - youTubeId: f0BSrBhudoY
@@ -60,4 +69,4 @@ MonoBehaviour:
       title: Unity 7 is RE-ANNOUNCED!
     - youTubeId: -qpKrATW4wM
       title: TOP 10 FREE NEW Assets JULY 2026!
-  websiteLatestVideosTimestamp: 1785269156
+  websiteLatestVideosTimestamp: 1785384032
