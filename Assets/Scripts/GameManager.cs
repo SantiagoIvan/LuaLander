@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Score updated: " + this.score);
     }
 
-    private void Lander_OnCoinCollected(object sender, Lander.CoinCollectedEventArgs coin)
+    private void Lander_OnCoinCollected(object sender, OnCoinCollectedEventArgs coin)
     {
         this.addScore(coin.coinValue);
     }

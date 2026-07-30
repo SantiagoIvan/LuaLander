@@ -19,13 +19,14 @@ public class LandedUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void Lander_OnLanding(object sender, Lander.OnLandingEventArgs landing)
+    private void Lander_OnLanding(object sender, OnLandingEventArgs landing)
     {
         Debug.Log("LandedUI: Landing event received. " + landing.landingResult);
         // Actualizar la UI con los datos del aterrizaje exitoso
-        if(landing.landingResult == Lander.LandingResult.Success)
+        if(landing.landingResult == LandingResult.Success)
         {
             title.text = "Landing Successful!";
+            title.color = Color.white; // White color for success
         }
         else
         {

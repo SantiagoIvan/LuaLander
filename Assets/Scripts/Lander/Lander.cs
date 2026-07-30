@@ -12,34 +12,10 @@ public class Lander : MonoBehaviour
     public event EventHandler OnRightForce;
     public event EventHandler OnBeforeForceApplied;
 
-    // Para las monedas
-    public class CoinCollectedEventArgs : EventArgs
-    {
-        public int coinValue;
-        public CoinCollectedEventArgs(int value)
-        {
-            coinValue = value;
-        }
-    }
-    public event EventHandler<CoinCollectedEventArgs> OnCoinCollected;
-
-    // Para el landing exitoso
-    public enum LandingResult
-    {
-        Success,
-        WrongLandingArea,
-        TooSteepLanding,
-        TooFastLanding
-    }
+    
+    public event EventHandler<OnCoinCollectedEventArgs> OnCoinCollected;
     public event EventHandler<OnLandingEventArgs> OnLanding;
-    public class OnLandingEventArgs : EventArgs
-    {
-        public LandingResult landingResult;
-        public float landingSpeed;
-        public float landingAngle;
-        public int multiplier;
-        public int finalScore;
-    }
+    
 
     private Rigidbody2D landerRigidbody2D;
     [SerializeField] private int rotationRate = 50;
@@ -49,6 +25,7 @@ public class Lander : MonoBehaviour
     [SerializeField] private float fuelAmount = 100f; // Cantidad de combustible inicial
     [SerializeField] private float fuelConsumptionRate = 10f; // Cantidad de combustible consumido por segundo al aplicar fuerza
     [SerializeField] private float maxFuelAmount = 120f;
+    [SerializeField] private float NORMAL_GRAVITY_SCALE = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // Para referencias externas
@@ -62,6 +39,7 @@ public class Lander : MonoBehaviour
     {
         landerRigidbody2D = GetComponent<Rigidbody2D>();
         Instance = this;
+        landerRigidbody2D.gravityScale = 0f;
     }
 
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
@@ -91,6 +69,7 @@ public class Lander : MonoBehaviour
         if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
             this.consumeFuel();
+            this.landerRigidbody2D.gravityScale = NORMAL_GRAVITY_SCALE;
         }
 
         if (Keyboard.current.upArrowKey.isPressed)
@@ -178,7 +157,7 @@ public class Lander : MonoBehaviour
         {
             Debug.Log("Coin collected!");
             // You can add coin collection logic here
-            OnCoinCollected?.Invoke(this, new CoinCollectedEventArgs(coin.getValue())); // O puedo directamente hablarle al gamemanager para que sume puntos.
+            OnCoinCollected?.Invoke(this, new OnCoinCollectedEventArgs(coin.getValue())); // O puedo directamente hablarle al gamemanager para que sume puntos.
             coin.getCollected();
         }
     }
