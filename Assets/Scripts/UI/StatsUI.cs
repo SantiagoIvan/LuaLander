@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class StatsUI : MonoBehaviour
 {
     // El UGUI es para UI Objects como el CANVAS
+    [SerializeField] private TextMeshProUGUI level;
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private TextMeshProUGUI speedX;
     [SerializeField] private TextMeshProUGUI speedY;
@@ -21,6 +22,7 @@ public class StatsUI : MonoBehaviour
     private void Start()
     {
         this.maxFuelAmount = Lander.Instance.getMaxFuelAmount();
+        level.text = GameManager.getCurrentLevel().ToString();
     }
 
     private void Update()

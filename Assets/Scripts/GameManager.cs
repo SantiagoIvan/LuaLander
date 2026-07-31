@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     // El game manager tiene un nivel actual y tiene la lista de GameLevels posibles (los prefabs)
     // Entonces lo que hace es hacer el Instantiate para inicializar uno y mete el Lander en esa posicion.
-    [SerializeField] private int currentLevel = 1;
+    private static int currentLevel = 1; // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
     [SerializeField] private List<GameLevel> gameLevelList;
 
     public static GameManager Instance { get; private set; }
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         foreach(GameLevel gameLevel in this.gameLevelList)
         {
-            if(gameLevel.getLevel() == this.currentLevel)
+            if(gameLevel.getLevel() == currentLevel)
             {
                 GameLevel newGameLevel = Instantiate(gameLevel, Vector3.zero, Quaternion.identity);
                 Transform landerPosition = newGameLevel.getLanderStartPosition();
@@ -88,11 +88,15 @@ public class GameManager : MonoBehaviour
 
     public void nextLevel()
     {
-        this.currentLevel++;
-        SceneManager.LoadScene(0);
+        currentLevel++;
+        SceneManager.LoadScene(0); // Esto va a cargar el GameScene, va a cargar el gameObject.
     }
     public void restartLevel()
     {
         SceneManager.LoadScene(0);
+    }
+    public static int getCurrentLevel()
+    {
+        return currentLevel;
     }
 }
