@@ -4,8 +4,13 @@ public class CinemachineCameraHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera cineMachineCamera;
     private float NORMAL_ORTHOGRAPHIC_SIZE = 10f;
+    private float targetOrthographicSize = 10f;
 
-
+    private void Update()
+    {
+        float zoomSpeed = 2f;
+        this.cineMachineCamera.Lens.OrthographicSize = Mathf.Lerp(this.cineMachineCamera.Lens.OrthographicSize, this.targetOrthographicSize, zoomSpeed * Time.deltaTime);
+    }
     public void levelLoaded(GameLevel gameLevel)
     {
         this.cineMachineCamera.Target.TrackingTarget = gameLevel.getCameraStartPosition();
@@ -20,7 +25,7 @@ public class CinemachineCameraHandler : MonoBehaviour
 
     public void setTargetOrthographicSize(float targetOrthographicSize)
     {
-        this.cineMachineCamera.Lens.OrthographicSize = targetOrthographicSize;
+        this.targetOrthographicSize = targetOrthographicSize;
     }
 
 }
