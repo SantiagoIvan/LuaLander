@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Unity.Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     // Entonces lo que hace es hacer el Instantiate para inicializar uno y mete el Lander en esa posicion.
     private static int currentLevel = 1; // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
     [SerializeField] private List<GameLevel> gameLevelList;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
 
     public static GameManager Instance { get; private set; }
 
@@ -54,7 +56,11 @@ public class GameManager : MonoBehaviour
 
     private void Lander_OnStateChanged(object sender, OnStateChangedEventArgs state)
     {
-        this.state = State.Normal;
+        this.state = state.newState;
+        if(this.state == State.Normal)
+        {
+            cinemachineCamera.Target.TrackingTarget = Lander.Instance.transform;
+        }
     }
 
     public void landed(float landingScore)
@@ -74,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     private void loadCurrentLevel()
     {
+        Debug.Log("Current level is: " + currentLevel.ToString());
         foreach(GameLevel gameLevel in this.gameLevelList)
         {
             if(gameLevel.getLevel() == currentLevel)
@@ -81,6 +88,7 @@ public class GameManager : MonoBehaviour
                 GameLevel newGameLevel = Instantiate(gameLevel, Vector3.zero, Quaternion.identity);
                 Transform landerPosition = newGameLevel.getLanderStartPosition();
                 Lander.Instance.transform.position = landerPosition.position;
+                this.cinemachineCamera.Target.TrackingTarget = newGameLevel.getCameraStartPosition();
             }
         }
     }

@@ -4846,6 +4846,10 @@ MonoBehaviour:
   gameLevelList:
   - {fileID: 6204155117474773674, guid: 5b4396e4ddf9c544badf00a9d277bd7d, type: 3}
   - {fileID: 8229628755333385947, guid: 7eb9c6a1e71585e42a63535fec999b40, type: 3}
+  - {fileID: 4723536139502885222, guid: 828e2ac64b10fe44f8a6d64f32146ca4, type: 3}
+  - {fileID: 330238076822782125, guid: 467a3aa7d8b508a4dbc673af6fd38f23, type: 3}
+  - {fileID: 3751704548011883539, guid: a4c3adcc446eaf4468232619fc4c7bea, type: 3}
+  cinemachineCamera: {fileID: 63185833}
 --- !u!4 &1617870771
 Transform:
   m_ObjectHideFlags: 0

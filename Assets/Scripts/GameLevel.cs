@@ -6,6 +6,7 @@ public class GameLevel : MonoBehaviour
 {
     [SerializeField] private int level;
     [SerializeField] private Transform landerStartPosition;
+    [SerializeField] private Transform cameraStartPosition;
 
     public Transform getLanderStartPosition()
     {
@@ -15,4 +16,5 @@ public class GameLevel : MonoBehaviour
     {
         return level;
     }
+    public Transform getCameraStartPosition() { return cameraStartPosition; }
 }
