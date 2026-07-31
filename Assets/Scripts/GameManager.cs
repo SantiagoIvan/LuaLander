@@ -1,10 +1,17 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private int score = 0;
     [SerializeField] private float time = 30f;
     private State state = State.WaitingToStart;
+
+    // El game manager tiene un nivel actual y tiene la lista de GameLevels posibles (los prefabs)
+    // Entonces lo que hace es hacer el Instantiate para inicializar uno y mete el Lander en esa posicion.
+    [SerializeField] private int currentLevel = 1;
+    [SerializeField] private List<GameLevel> gameLevelList;
 
     public static GameManager Instance { get; private set; }
 
@@ -17,6 +24,8 @@ public class GameManager : MonoBehaviour
     {
         Lander.Instance.OnCoinCollected += Lander_OnCoinCollected;
         Lander.Instance.OnStateChanged += Lander_OnStateChanged;
+
+        this.loadCurrentLevel();
     }
 
     private void Update()
@@ -61,5 +70,29 @@ public class GameManager : MonoBehaviour
     public float getTime()
     {
         return this.time;
+    }
+
+    private void loadCurrentLevel()
+    {
+        foreach(GameLevel gameLevel in this.gameLevelList)
+        {
+            if(gameLevel.getLevel() == this.currentLevel)
+            {
+                GameLevel newGameLevel = Instantiate(gameLevel, Vector3.zero, Quaternion.identity);
+                Transform landerPosition = newGameLevel.getLanderStartPosition();
+                Lander.Instance.transform.position = landerPosition.position;
+            }
+        }
+    }
+
+
+    public void nextLevel()
+    {
+        this.currentLevel++;
+        SceneManager.LoadScene(0);
+    }
+    public void restartLevel()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class LandedUI : MonoBehaviour
 {
@@ -9,7 +12,20 @@ public class LandedUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreMultiplier;
     [SerializeField] private TextMeshProUGUI timeLeft;
     [SerializeField] private TextMeshProUGUI finalScore;
+    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button nextButton;
+    [SerializeField] private TextMeshProUGUI nextButtonText;
 
+    private Action nextButtonClickAction;
+    private void Awake()
+    {
+        mainMenuButton.onClick.AddListener(() => {
+            //SceneManager.LoadScene(0);
+        } );
+        nextButton.onClick.AddListener(() => {
+            this.nextButtonClickAction();
+        } );
+    }
 
     private void Start()
     {
@@ -27,11 +43,15 @@ public class LandedUI : MonoBehaviour
         {
             title.text = "Landing Successful!";
             title.color = Color.white; // White color for success
+            nextButtonText.text = "Next level";
+            nextButtonClickAction = GameManager.Instance.nextLevel;
         }
         else
         {
             title.text = "Landing Failed!";
             title.color = new Color(205f / 255f, 34f / 255f, 34f / 255f, 1f); // #CD2222 in Unity's Color format
+            nextButtonText.text = "Restart";
+            nextButtonClickAction = GameManager.Instance.restartLevel;
         }
         landingSpeed.text = landing.landingSpeed.ToString("F2");
         landingAngle.text = landing.landingAngle.ToString("F2");
