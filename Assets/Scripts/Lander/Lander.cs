@@ -69,7 +69,7 @@ public class Lander : MonoBehaviour
         switch (this.state)
         {
             case State.WaitingToStart:
-                if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                if (GameInput.Instance.isUpActionPressed() || GameInput.Instance.isLeftActionPressed() || GameInput.Instance.isRightActionPressed())
                 {
                     // Aca no consumo fiel porque al cambiar el estado, entra en el condicional de abajo y terminaria consumiendo 2 veces en un mismo frame.
                     this.landerRigidbody2D.gravityScale = NORMAL_GRAVITY_SCALE;
@@ -82,23 +82,23 @@ public class Lander : MonoBehaviour
                     // Podria emitir evento aca para largar humito o algo asi
                     return;
                 }
-                if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                if (GameInput.Instance.isUpActionPressed() || GameInput.Instance.isLeftActionPressed() || GameInput.Instance.isRightActionPressed())
                 {
                     this.consumeFuel();
                 }
 
-                if (Keyboard.current.upArrowKey.isPressed)
+                if (GameInput.Instance.isUpActionPressed())
                 {
                     landerRigidbody2D.AddForce(accelerationRate * transform.up * Time.fixedDeltaTime);
                     OnUpForce?.Invoke(this, EventArgs.Empty);
 
                 }
-                if (Keyboard.current.leftArrowKey.isPressed)
+                if (GameInput.Instance.isLeftActionPressed())
                 {
                     landerRigidbody2D.AddTorque(rotationRate * Time.fixedDeltaTime);
                     OnLeftForce?.Invoke(this, EventArgs.Empty);
                 }
-                if (Keyboard.current.rightArrowKey.isPressed)
+                if (GameInput.Instance.isRightActionPressed())
                 {
                     landerRigidbody2D.AddTorque(-rotationRate * Time.fixedDeltaTime);
                     OnRightForce?.Invoke(this, EventArgs.Empty);
