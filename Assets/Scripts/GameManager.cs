@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameLevel> gameLevelList;
     [SerializeField] private CinemachineCameraHandler cinemachineCameraHandler;
     [SerializeField] private int testLevel = 0;
+
+    public event EventHandler OnTimeOut;
 
     public static GameManager Instance { get; private set; }
 
@@ -40,6 +43,10 @@ public class GameManager : MonoBehaviour
         if(this.time > 0 && this.state == State.Normal)
         {
             this.time -= Time.deltaTime;
+        } else if (this.time <= 0 && this.state == State.Normal)
+        {
+            this.state = State.GameOver;
+            OnTimeOut?.Invoke(this, EventArgs.Empty);
         }
     }
 

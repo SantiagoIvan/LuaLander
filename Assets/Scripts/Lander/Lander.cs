@@ -45,6 +45,7 @@ public class Lander : MonoBehaviour
     private void Start()
     {
         Debug.Log("Lander script has started. Initial fuel is " + fuelAmount);
+        GameManager.Instance.OnTimeOut += GameManager_OnTimeOut;
     }
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     // No corre en cada update, sino en intervalos fijos de tiempo. Se recomienda usarlo para código de física.
@@ -221,5 +222,9 @@ public class Lander : MonoBehaviour
     {
         this.state = newState;
         this.OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { newState= newState });
+    }
+    private void GameManager_OnTimeOut(object sender, EventArgs e)
+    {
+        this.failLanding(LandingResult.TimeOut);
     }
 }

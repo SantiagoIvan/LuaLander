@@ -37,6 +37,7 @@ public class LanderVisual : MonoBehaviour
             case LandingResult.WrongLandingArea:
             case LandingResult.TooSteepLanding:
             case LandingResult.TooFastLanding:
+            case LandingResult.TimeOut:
                 Instantiate(this.explosionVFX, transform.position, Quaternion.identity);
                 this.gameObject.SetActive(false);
                 break;

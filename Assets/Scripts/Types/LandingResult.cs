@@ -6,5 +6,6 @@ public enum LandingResult
     Success,
     WrongLandingArea,
     TooSteepLanding,
-    TooFastLanding
+    TooFastLanding,
+    TimeOut,
 }
