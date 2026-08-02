@@ -15,6 +15,7 @@ public class LandedUI : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button nextButton;
     [SerializeField] private TextMeshProUGUI nextButtonText;
+    [SerializeField] private Transform centerPosition;
 
     private Action nextButtonClickAction;
     private void Awake()
@@ -43,8 +44,16 @@ public class LandedUI : MonoBehaviour
         {
             title.text = "Landing Successful!";
             title.color = Color.white; // White color for success
-            nextButtonText.text = "Next level";
-            nextButtonClickAction = GameManager.Instance.nextLevel;
+            if (GameManager.Instance.isLastLevel())
+            {
+                nextButton.gameObject.SetActive(false);
+                mainMenuButton.gameObject.transform.position = centerPosition.position;
+            }
+            else
+            {
+                nextButtonText.text = "Next level";
+                nextButtonClickAction = GameManager.Instance.nextLevel;
+            }
         }
         else
         {

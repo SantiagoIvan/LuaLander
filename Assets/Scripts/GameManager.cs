@@ -14,12 +14,17 @@ public class GameManager : MonoBehaviour
     private static int currentLevel = 1; // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
     [SerializeField] private List<GameLevel> gameLevelList;
     [SerializeField] private CinemachineCameraHandler cinemachineCameraHandler;
+    [SerializeField] private int testLevel = 0;
 
     public static GameManager Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
+        if (this.testLevel > 0)
+        {
+            currentLevel = this.testLevel;
+        }
     }
 
     private void Start()
@@ -106,5 +111,9 @@ public class GameManager : MonoBehaviour
     public static int getCurrentLevel()
     {
         return currentLevel;
+    }
+    public bool isLastLevel()
+    {
+        return currentLevel == this.gameLevelList.Count;
     }
 }

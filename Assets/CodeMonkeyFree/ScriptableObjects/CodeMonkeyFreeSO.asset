@@ -14,39 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1785478361
+  lastShownTimestamp: 1785688381
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1785478361
+  checkedLastUpdateTimestamp: 1785688381
   lastQOTDResponse:
-    questionId: 327
-    questionText: 'When would this code cause an error?
+    questionId: 328
+    questionText: 'What is the possible error in this code:
 
-      <p>Building closest
-      = null;</p>
+      <p>tickTimer +=
+      Time.deltaTime;</p>
 
-      <p>for (int i = 0; i &lt; instanceList.Count; i++) {</p>
+      <p>if (tickTimer &gt;= TICK_TIMER_MAX) {</p>
 
       <p>&nbsp;
-      &nbsp; if (Vector3.Distance(position, instanceList[i].GetPosition()) &lt; Vector3.Distance(position,
-      closest.GetPosition())) {</p>
+      &nbsp; tickTimer -= TICK_TIMER_MAX;</p>
 
-      <p>&nbsp; &nbsp; &nbsp; &nbsp; closest
-      = instanceList[i];</p>
+      <p>&nbsp; &nbsp; tick++;</p>
 
-      <p>&nbsp; &nbsp; }</p>
+      <p>&nbsp;
+      &nbsp; OnTickEvent(this, EventArgs.Empty);</p>
 
-      <p>}</p>
-
-      <p>return
-      closest;</p>'
-    answerA: When instanceList is empty
-    answerB: When instanceList has at least one element
-    answerC: When instanceList has exactly two elements
+      <p>}</p>'
+    answerA: None
+    answerB: NullReferenceException
+    answerC: 2 ticks at once
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1785478361
+  lastQotdTimestamp: 1785688381
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
     topText: Get 80% OFF on ALL my Courses and Games!!!
@@ -54,19 +50,19 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1785478361
+  lastDynamicHeaderTimestamp: 1785688381
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1785478361
+  websiteLatestMessageTimestamp: 1785688381
   websiteLatestVideos:
     videos:
+    - youTubeId: -1yYVVVN4as
+      title: BEST NEW Visual Assets to INSPIRE YOU! (JULY 2026)
     - youTubeId: f0BSrBhudoY
       title: TOP 10 NEW Systems and Tools JULY 2026! | Unity Asset Store
     - youTubeId: _0Lp-iXEhfU
       title: Join my Game Dev Practice Lab for FREE!
     - youTubeId: 2dyD9yWWtCU
       title: Unity 7 is RE-ANNOUNCED!
-    - youTubeId: -qpKrATW4wM
-      title: TOP 10 FREE NEW Assets JULY 2026!
-  websiteLatestVideosTimestamp: 1785478361
+  websiteLatestVideosTimestamp: 1785688381

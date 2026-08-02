@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 63185834}
   - component: {fileID: 63185833}
+  - component: {fileID: 63185835}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -298,7 +299,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 9.84
+    OrthographicSize: 23.57
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -331,6 +332,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &63185835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63185832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
+  TrackerSettings:
+    BindingMode: 4
+    PositionDamping: {x: 1, y: 1, z: 1}
+    AngularDampingMode: 0
+    RotationDamping: {x: 1, y: 1, z: 1}
+    QuaternionDamping: 1
+  FollowOffset: {x: 0, y: 0, z: -10}
 --- !u!1 &65391090
 GameObject:
   m_ObjectHideFlags: 0
@@ -4863,6 +4883,7 @@ MonoBehaviour:
   - {fileID: 330238076822782125, guid: 467a3aa7d8b508a4dbc673af6fd38f23, type: 3}
   - {fileID: 3751704548011883539, guid: a4c3adcc446eaf4468232619fc4c7bea, type: 3}
   cinemachineCameraHandler: {fileID: 94435012}
+  testLevel: 5
 --- !u!4 &1617870771
 Transform:
   m_ObjectHideFlags: 0
@@ -5801,7 +5822,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.84
+  orthographic size: 23.57
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
