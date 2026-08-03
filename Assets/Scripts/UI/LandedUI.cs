@@ -21,7 +21,7 @@ public class LandedUI : MonoBehaviour
     private void Awake()
     {
         mainMenuButton.onClick.AddListener(() => {
-            //SceneManager.LoadScene(0);
+            SceneManager.LoadScene(0); // La que corresponde a MainMenuScene
         } );
         nextButton.onClick.AddListener(() => {
             this.nextButtonClickAction();

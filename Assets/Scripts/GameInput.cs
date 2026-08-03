@@ -25,6 +25,10 @@ public class GameInput : MonoBehaviour
     {
         return inputActions.Player.LanderLeft.IsPressed();
     }
+    public Vector2 getMovementInputVector2()
+    {
+        return inputActions.Player.MovementPad.ReadValue<Vector2>();
+    }
     private void OnDestroy()
     {
         this.inputActions.Disable();

@@ -28,6 +28,7 @@ public class Lander : MonoBehaviour
     [SerializeField] private float fuelConsumptionRate = 10f; // Cantidad de combustible consumido por segundo al aplicar fuerza
     [SerializeField] private float maxFuelAmount = 120f;
     [SerializeField] private float NORMAL_GRAVITY_SCALE = 1f;
+    [SerializeField] private float PAD_MOVEMENT_THRESHOLD = 0.4f; // Umbral para considerar que el pad de movimiento esta siendo presionado
     private State state;
 
 
@@ -69,7 +70,11 @@ public class Lander : MonoBehaviour
         switch (this.state)
         {
             case State.WaitingToStart:
-                if (GameInput.Instance.isUpActionPressed() || GameInput.Instance.isLeftActionPressed() || GameInput.Instance.isRightActionPressed())
+                if (GameInput.Instance.isUpActionPressed() || 
+                    GameInput.Instance.isLeftActionPressed() || 
+                    GameInput.Instance.isRightActionPressed() || 
+                    GameInput.Instance.getMovementInputVector2() != Vector2.zero
+                    )
                 {
                     // Aca no consumo fiel porque al cambiar el estado, entra en el condicional de abajo y terminaria consumiendo 2 veces en un mismo frame.
                     this.landerRigidbody2D.gravityScale = NORMAL_GRAVITY_SCALE;
@@ -82,23 +87,27 @@ public class Lander : MonoBehaviour
                     // Podria emitir evento aca para largar humito o algo asi
                     return;
                 }
-                if (GameInput.Instance.isUpActionPressed() || GameInput.Instance.isLeftActionPressed() || GameInput.Instance.isRightActionPressed())
+                if (GameInput.Instance.isUpActionPressed() ||
+                    GameInput.Instance.isLeftActionPressed() ||
+                    GameInput.Instance.isRightActionPressed() ||
+                    GameInput.Instance.getMovementInputVector2().y > this.PAD_MOVEMENT_THRESHOLD
+                    )
                 {
                     this.consumeFuel();
                 }
 
-                if (GameInput.Instance.isUpActionPressed())
+                if (GameInput.Instance.isUpActionPressed() || GameInput.Instance.getMovementInputVector2().y > this.PAD_MOVEMENT_THRESHOLD)
                 {
                     landerRigidbody2D.AddForce(accelerationRate * transform.up * Time.fixedDeltaTime);
                     OnUpForce?.Invoke(this, EventArgs.Empty);
 
                 }
-                if (GameInput.Instance.isLeftActionPressed())
+                if (GameInput.Instance.isLeftActionPressed() || GameInput.Instance.getMovementInputVector2().x < -this.PAD_MOVEMENT_THRESHOLD)
                 {
                     landerRigidbody2D.AddTorque(rotationRate * Time.fixedDeltaTime);
                     OnLeftForce?.Invoke(this, EventArgs.Empty);
                 }
-                if (GameInput.Instance.isRightActionPressed())
+                if (GameInput.Instance.isRightActionPressed() || GameInput.Instance.getMovementInputVector2().x > this.PAD_MOVEMENT_THRESHOLD)
                 {
                     landerRigidbody2D.AddTorque(-rotationRate * Time.fixedDeltaTime);
                     OnRightForce?.Invoke(this, EventArgs.Empty);

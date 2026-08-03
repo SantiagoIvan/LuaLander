@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1785688381
+  lastShownTimestamp: 1785782066
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1785688381
+  checkedLastUpdateTimestamp: 1785782066
   lastQOTDResponse:
     questionId: 328
     questionText: 'What is the possible error in this code:
@@ -42,7 +42,7 @@ MonoBehaviour:
     answerC: 2 ticks at once
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1785688381
+  lastQotdTimestamp: 1785782066
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
     topText: Get 80% OFF on ALL my Courses and Games!!!
@@ -50,19 +50,19 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1785688381
+  lastDynamicHeaderTimestamp: 1785782066
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1785688381
+  websiteLatestMessageTimestamp: 1785782066
   websiteLatestVideos:
     videos:
+    - youTubeId: 2oHitHMNyNw
+      title: WHY Scope Creep DESTROYS Indie Games (and how to stop it)
     - youTubeId: -1yYVVVN4as
       title: BEST NEW Visual Assets to INSPIRE YOU! (JULY 2026)
     - youTubeId: f0BSrBhudoY
       title: TOP 10 NEW Systems and Tools JULY 2026! | Unity Asset Store
     - youTubeId: _0Lp-iXEhfU
       title: Join my Game Dev Practice Lab for FREE!
-    - youTubeId: 2dyD9yWWtCU
-      title: Unity 7 is RE-ANNOUNCED!
-  websiteLatestVideosTimestamp: 1785688381
+  websiteLatestVideosTimestamp: 1785782066
