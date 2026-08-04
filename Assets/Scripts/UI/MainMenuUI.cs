@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -10,9 +9,11 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1f;
         playButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(1); // Load the game scene (assuming it's at index 1)
+            GameManager.resetData();
+            SceneLoader.LoadScene(SceneLoader.Scenes.GameScene);
         });
         settingsButton.onClick.AddListener(() =>
         {
@@ -26,5 +27,9 @@ public class MainMenuUI : MonoBehaviour
         });
     }
 
+    private void Start()
+    {
+        playButton.Select();
+    }
 
 }

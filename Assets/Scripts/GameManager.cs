@@ -13,11 +13,14 @@ public class GameManager : MonoBehaviour
     // El game manager tiene un nivel actual y tiene la lista de GameLevels posibles (los prefabs)
     // Entonces lo que hace es hacer el Instantiate para inicializar uno y mete el Lander en esa posicion.
     private static int currentLevel = 1; // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
+    private static int finalScore = 0; // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
     [SerializeField] private List<GameLevel> gameLevelList;
     [SerializeField] private CinemachineCameraHandler cinemachineCameraHandler;
     [SerializeField] private int testLevel = 0;
 
     public event EventHandler OnTimeOut;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameResumed;
 
     public static GameManager Instance { get; private set; }
 
@@ -34,10 +37,16 @@ public class GameManager : MonoBehaviour
     {
         Lander.Instance.OnCoinCollected += Lander_OnCoinCollected;
         Lander.Instance.OnStateChanged += Lander_OnStateChanged;
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
 
         this.loadCurrentLevel();
     }
 
+    public static void resetData()
+    {
+        currentLevel = 1;
+        finalScore = 0;
+    }
     private void Update()
     {
         if(this.time > 0 && this.state == State.Normal)
@@ -92,35 +101,81 @@ public class GameManager : MonoBehaviour
 
     private void loadCurrentLevel()
     {
-        Debug.Log("Current level is: " + currentLevel.ToString());
-        foreach(GameLevel gameLevel in this.gameLevelList)
-        {
-            if(gameLevel.getLevel() == currentLevel)
-            {
-                GameLevel newGameLevel = Instantiate(gameLevel, Vector3.zero, Quaternion.identity);
-                Transform landerPosition = newGameLevel.getLanderStartPosition();
-                Lander.Instance.transform.position = landerPosition.position;
-                this.cinemachineCameraHandler.levelLoaded(newGameLevel);
-            }
-        }
+        Debug.Log("Current state: " + this.state + " Loading level: " + currentLevel + " with final score " + finalScore);
+        GameLevel gameLevel = this.getCurrentGameLevel();
+        Instantiate(gameLevel, Vector3.zero, Quaternion.identity);
+        Transform landerPosition = gameLevel.getLanderStartPosition();
+        Lander.Instance.transform.position = landerPosition.position;
+        this.cinemachineCameraHandler.levelLoaded(gameLevel);
+        
     }
 
-
+    private GameLevel getCurrentGameLevel()
+    {
+        foreach (GameLevel gameLevel in this.gameLevelList)
+        {
+            if (gameLevel.getLevel() == currentLevel)
+            {
+                return gameLevel;
+            }
+        }
+        return null;
+    }
     public void nextLevel()
     {
+        if (this.isLastLevel())
+        {
+            SceneLoader.LoadScene(SceneLoader.Scenes.GameOver);
+            return;
+        }
         currentLevel++;
-        SceneManager.LoadScene(0); // Esto va a cargar el GameScene, va a cargar el gameObject.
+        finalScore += this.score;
+        SceneLoader.LoadScene(SceneLoader.Scenes.GameScene); // Esto va a cargar el GameScene, va a cargar el gameObject.
     }
     public void restartLevel()
     {
-        SceneManager.LoadScene(0);
+        SceneLoader.LoadScene(SceneLoader.Scenes.GameScene);
     }
     public static int getCurrentLevel()
     {
         return currentLevel;
     }
+    public static int getFinalScore()
+    {
+        return finalScore;
+    }
     public bool isLastLevel()
     {
         return currentLevel == this.gameLevelList.Count;
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e)
+    {
+        if (this.state == State.Normal)
+        {
+            this.pauseGame();
+        }
+        else if (this.state == State.Paused)
+        {
+            this.resumeGame();
+        }
+    }
+
+    public void pauseGame()
+    {
+        Time.timeScale = 0f;
+        this.state = State.Paused;
+        this.OnGamePaused?.Invoke(this, EventArgs.Empty);
+    }
+    public void resumeGame()
+    {
+        Time.timeScale = 1f;
+        this.state = State.Normal;
+        this.OnGameResumed?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void showFinalScore()
+    {
+        this.nextLevel();
     }
 }

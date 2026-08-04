@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
 
 public class LandedUI : MonoBehaviour
@@ -16,16 +15,22 @@ public class LandedUI : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private TextMeshProUGUI nextButtonText;
     [SerializeField] private Transform centerPosition;
+    [SerializeField] private Button showFinalScoreButton;
 
     private Action nextButtonClickAction;
     private void Awake()
     {
         mainMenuButton.onClick.AddListener(() => {
-            SceneManager.LoadScene(0); // La que corresponde a MainMenuScene
+            SceneLoader.LoadScene(SceneLoader.Scenes.MainMenu);
         } );
         nextButton.onClick.AddListener(() => {
             this.nextButtonClickAction();
         } );
+        showFinalScoreButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.showFinalScore();
+        });
+        this.showFinalScoreButton.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -33,6 +38,7 @@ public class LandedUI : MonoBehaviour
         Lander.Instance.OnLanding += Lander_OnLanding;
         Debug.Log("LandedUI: Subscribed to landing event.");
         Debug.Log(Lander.Instance);
+        nextButton.Select();
         gameObject.SetActive(false);
     }
 
@@ -47,7 +53,10 @@ public class LandedUI : MonoBehaviour
             if (GameManager.Instance.isLastLevel())
             {
                 nextButton.gameObject.SetActive(false);
-                mainMenuButton.gameObject.transform.position = centerPosition.position;
+                mainMenuButton.gameObject.SetActive(false);
+                showFinalScoreButton.gameObject.transform.position = centerPosition.position;
+                showFinalScoreButton.Select();
+                showFinalScoreButton.gameObject.SetActive(true);
             }
             else
             {
