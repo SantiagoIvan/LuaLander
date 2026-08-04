@@ -2518,7 +2518,7 @@ MonoBehaviour:
   settingsButton: {fileID: 1956375200}
   quitButton: {fileID: 1016229413}
   logoGameObject: {fileID: 1558192071}
-  settingsUIGameObject: {fileID: 596095912}
+  settingsUIGameObject: {fileID: 596095915}
   mainMenuOptionsGameObject: {fileID: 2005189811}
 --- !u!1 &1114968258
 GameObject:

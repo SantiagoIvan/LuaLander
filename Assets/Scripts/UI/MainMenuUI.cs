@@ -7,14 +7,14 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject logoGameObject;
-    [SerializeField] private GameObject settingsUIGameObject;
+    [SerializeField] private SettingsUI settingsUIGameObject;
     [SerializeField] private GameObject mainMenuOptionsGameObject;
 
 
     private void Awake()
     {
         Time.timeScale = 1f;
-        settingsUIGameObject.SetActive(false);
+        settingsUIGameObject.Hide();
         playButton.onClick.AddListener(() =>
         {
             GameManager.resetData();
@@ -41,13 +41,13 @@ public class MainMenuUI : MonoBehaviour
     {
         logoGameObject.SetActive(false);
         mainMenuOptionsGameObject.SetActive(false);
-        settingsUIGameObject.SetActive(true);
+        settingsUIGameObject.Show();
     }
 
     public void showMainMenuOptions()
     {
         logoGameObject.SetActive(true);
         mainMenuOptionsGameObject.SetActive(true);
-        settingsUIGameObject.SetActive(false);
+        settingsUIGameObject.Hide();
     }
 }

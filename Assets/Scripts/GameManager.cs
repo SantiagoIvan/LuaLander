@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
     {
         // Sumar al score el puntaje del landing exitoso
         this.addScore((int)(landingScore + this.time));
+        Time.timeScale = 0f;
     }
     public void failLanding()
     {
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
         Transform landerPosition = gameLevel.getLanderStartPosition();
         Lander.Instance.transform.position = landerPosition.position;
         this.cinemachineCameraHandler.levelLoaded(gameLevel);
+        Time.timeScale = 1f;
         
     }
 

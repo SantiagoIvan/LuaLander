@@ -39,4 +39,22 @@ public class SettingsUI : MonoBehaviour
     {
         this.mainMenuUI.showMainMenuOptions();
     }
+
+    public void Show()
+    {
+        this.loadValues();
+        this.gameObject.SetActive(true);
+    }
+
+    private void loadValues()
+    {
+        gravity.text = GameManager.getStartingGravity().ToString();
+        fuelLimit.text = GameManager.getStartingFuelLimit().ToString();
+        time.text = GameManager.getStartingTime().ToString();
+        accRate.text = GameManager.getAccRate().ToString();
+    }
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
