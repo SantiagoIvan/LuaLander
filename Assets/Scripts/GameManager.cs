@@ -12,17 +12,57 @@ public class GameManager : MonoBehaviour
 
     // El game manager tiene un nivel actual y tiene la lista de GameLevels posibles (los prefabs)
     // Entonces lo que hace es hacer el Instantiate para inicializar uno y mete el Lander en esa posicion.
-    private static int currentLevel = 1; // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
-    private static int finalScore = 0; // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
+    // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
+    private static int currentLevel = 1; 
+    private static int finalScore = 0; 
+    private static float startingTime = 30f; 
+    private static float startingFuelLimit = 100f;
+    private static float startingGravity = 1f;
+    private static int startingAccRate = 1000;
+
     [SerializeField] private List<GameLevel> gameLevelList;
     [SerializeField] private CinemachineCameraHandler cinemachineCameraHandler;
     [SerializeField] private int testLevel = 0;
+
 
     public event EventHandler OnTimeOut;
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameResumed;
 
     public static GameManager Instance { get; private set; }
+
+    public static float getStartingTime()
+    {
+        return startingTime;
+    }
+    public static void setStartingTime(float newStartingTime)
+    {
+        startingTime = newStartingTime;
+    }
+    public static float getStartingFuelLimit()
+    {
+        return startingFuelLimit;
+    }
+    public static void setStartingFuelLimit(float newStartingFuelLimit)
+    {
+        startingFuelLimit = newStartingFuelLimit;
+    }
+    public static float getStartingGravity()
+    {
+        return startingGravity;
+    }
+    public static void setStartingGravity(float newStartingGravity)
+    {
+        startingGravity = newStartingGravity;
+    }
+    public static void setAccRate(int newAccRate)
+    {
+        startingAccRate = newAccRate;
+    }
+    public static int getAccRate()
+    {
+        return startingAccRate;
+    }
 
     private void Awake()
     {
@@ -31,6 +71,7 @@ public class GameManager : MonoBehaviour
         {
             currentLevel = this.testLevel;
         }
+        this.time = startingTime;
     }
 
     private void Start()

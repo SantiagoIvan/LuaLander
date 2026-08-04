@@ -21,7 +21,7 @@ public class Lander : MonoBehaviour
 
     private Rigidbody2D landerRigidbody2D;
     [SerializeField] private int rotationRate = 50;
-    [SerializeField] private int accelerationRate = 1000;
+    [SerializeField] private int accelerationRate;
     [SerializeField] private float softLandingVelocityMagitude = 3.5f; // Maxima velocidad permitida al aterrizar
     [SerializeField] private float minDotVector = 0.9f; // Minimo producto cartesiano entre el vector canonico y global y el transform.y del lander para considerar que esta vertical
     [SerializeField] private float fuelAmount = 100f; // Cantidad de combustible inicial
@@ -45,7 +45,11 @@ public class Lander : MonoBehaviour
     // Para referencias externas
     private void Start()
     {
-        Debug.Log("Lander script has started. Initial fuel is " + fuelAmount);
+        this.maxFuelAmount = GameManager.getStartingFuelLimit();
+        this.NORMAL_GRAVITY_SCALE = GameManager.getStartingGravity();
+        this.fuelAmount = Mathf.Min(this.maxFuelAmount, this.fuelAmount);
+        this.accelerationRate = GameManager.getAccRate();
+        Debug.Log("Lander has spawned with following stats: Fuel=" + this.fuelAmount + ", Gravity=" + this.NORMAL_GRAVITY_SCALE + ", AccRate=" + this.accelerationRate);
         GameManager.Instance.OnTimeOut += GameManager_OnTimeOut;
     }
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
