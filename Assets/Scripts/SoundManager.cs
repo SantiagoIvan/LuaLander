@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Debug.Log("SoundManager Awake: soundVolume = " + soundVolume);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

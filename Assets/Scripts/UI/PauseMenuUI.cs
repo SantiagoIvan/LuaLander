@@ -16,19 +16,23 @@ public class PauseMenuUI : MonoBehaviour
         soundVolumeButton.onClick.AddListener(() =>
         {
             SoundManager.Instance.upSoundVolume();
+            updateSoundVolume();
         });
 
         musicVolumeButton.onClick.AddListener(() =>
         {
             MusicManager.Instance.upMusicVolume();
+            updateMusicVolume();
         });
         soundVolumeRightClick.OnRightClick += () =>
         {
             SoundManager.Instance.downSoundVolume();
+            updateSoundVolume();
         };
         musicVolumeRightClick.OnRightClick += () =>
         {
             MusicManager.Instance.downMusicVolume();
+            updateMusicVolume();
         };
 
         resumeButton.onClick.AddListener(() =>
@@ -39,11 +43,16 @@ public class PauseMenuUI : MonoBehaviour
         {
             SceneLoader.LoadScene(SceneLoader.Scenes.MainMenu);
         });
+        updateMusicVolume();
+        updateSoundVolume();
 
     }
-    private void Update()
+    private void updateSoundVolume()
     {
         soundVolumeButton.GetComponentInChildren<TMPro.TMP_Text>().text = "SFX: " + SoundManager.Instance.getSoundVolume();
+    }
+    private void updateMusicVolume()
+    {
         musicVolumeButton.GetComponentInChildren<TMPro.TMP_Text>().text = "Music: " + MusicManager.Instance.getMusicVolume();
     }
 

@@ -1684,6 +1684,8 @@ MonoBehaviour:
   mainMenuButton: {fileID: 538712220}
   soundVolumeButton: {fileID: 1462843929}
   musicVolumeButton: {fileID: 1162598800}
+  soundVolumeRightClick: {fileID: 1462843932}
+  musicVolumeRightClick: {fileID: 1162598803}
 --- !u!1 &377605846
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,6 +4997,7 @@ GameObject:
   - component: {fileID: 1162598802}
   - component: {fileID: 1162598801}
   - component: {fileID: 1162598800}
+  - component: {fileID: 1162598803}
   m_Layer: 5
   m_Name: MusicVolumeButton
   m_TagString: Untagged
@@ -5104,6 +5107,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162598798}
   m_CullTransparentMesh: 1
+--- !u!114 &1162598803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162598798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2febd3d6095cb0b4f98ee4533fe57881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RightClickHandler
 --- !u!1 &1178871514 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 570857052369263401, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
@@ -5792,6 +5807,7 @@ GameObject:
   - component: {fileID: 1462843931}
   - component: {fileID: 1462843930}
   - component: {fileID: 1462843929}
+  - component: {fileID: 1462843932}
   m_Layer: 5
   m_Name: SoundVolumeButton
   m_TagString: Untagged
@@ -5901,6 +5917,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462843927}
   m_CullTransparentMesh: 1
+--- !u!114 &1462843932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462843927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2febd3d6095cb0b4f98ee4533fe57881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RightClickHandler
 --- !u!1 &1465929148
 GameObject:
   m_ObjectHideFlags: 0

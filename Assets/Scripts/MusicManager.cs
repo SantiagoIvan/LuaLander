@@ -14,6 +14,8 @@ public class MusicManager : MonoBehaviour
     {
         Instance = this;
         this.musicAudioSource.time = timeMusic;
+        this.musicAudioSource.volume = musicVolume;
+        Debug.Log("MusicManager Awake: timeMusic = " + timeMusic + " and musicVolume = " + musicVolume);
     }
 
     private void Update()
