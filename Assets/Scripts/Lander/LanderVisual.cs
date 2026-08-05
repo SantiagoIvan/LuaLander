@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+
 /*
  * Esta clase escucha por lo eventos emitidos por el Lander script.
  * El lander script, cuando detecta que se presiono una tecla de movimiento, emite un evento que es escuchado por esta clase.
@@ -11,6 +12,7 @@ public class LanderVisual : MonoBehaviour
     [SerializeField] private ParticleSystem middleThrusterParticleSystem;
     [SerializeField] private ParticleSystem rightThrusterParticleSystem;
     [SerializeField] private GameObject explosionVFX;
+
 
     private Lander lander; // tambien se puede hacer serializeField
     
