@@ -1,0 +1,75 @@
+using UnityEngine;
+using System;
+public class SoundManager : MonoBehaviour
+{
+    // Singleton pattern
+    public static SoundManager Instance { get; private set; }
+
+    [SerializeField] private AudioClip fuelPickupSound;
+    [SerializeField] private AudioClip coinPickupSound;
+    [SerializeField] private AudioClip crashSound;
+    [SerializeField] private AudioClip successfulLanding;
+    [SerializeField] private static float soundVolume = 5f;
+    private static float maxSoundVolume = 10f;
+
+    public event EventHandler OnSoundVolumeChanged;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        Lander.Instance.OnFuelCollected += Lander_OnFuelCollected;
+        Lander.Instance.OnCoinCollected += Lander_OnCoinCollected;
+        Lander.Instance.OnLanding += Lander_OnLanding;
+    }
+    public void setSoundVolume(int newSoundVolume)
+    {
+        soundVolume = newSoundVolume;
+    }
+    public float getSoundVolume()
+    {
+        return soundVolume;
+    }
+    public float getMaxSoundVolume()
+    {
+        return maxSoundVolume;
+    }
+    private void Lander_OnFuelCollected(object sender, EventArgs e)
+    {
+        AudioSource.PlayClipAtPoint(fuelPickupSound, Lander.Instance.transform.position, this.getNormalizedSoundVolume()); // Spawnea un sound object que le digas para reproducir el sonido.
+    }
+    private void Lander_OnCoinCollected(object sender, OnCoinCollectedEventArgs e)
+    {
+        AudioSource.PlayClipAtPoint(coinPickupSound, Lander.Instance.transform.position, this.getNormalizedSoundVolume());
+    }
+    private void Lander_OnLanding(object sender, OnLandingEventArgs e)
+    {
+        if(e.landingResult == LandingResult.Success)
+        {
+            AudioSource.PlayClipAtPoint(successfulLanding, Lander.Instance.transform.position, this.getNormalizedSoundVolume());
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(crashSound, Lander.Instance.transform.position, this.getNormalizedSoundVolume());
+        }
+    }
+    public void upSoundVolume()
+    {
+        soundVolume = Mathf.Min(soundVolume + 1, maxSoundVolume);
+        Debug.Log("Sound volume increased to: " + soundVolume);
+        OnSoundVolumeChanged?.Invoke(this, EventArgs.Empty);
+    }
+    public void downSoundVolume()
+    {
+        soundVolume = Mathf.Max(soundVolume - 1, 0);
+        Debug.Log("Sound volume decreased to: " + soundVolume);
+        OnSoundVolumeChanged?.Invoke(this, EventArgs.Empty);
+    }
+    public float getNormalizedSoundVolume()
+    {
+        return soundVolume / maxSoundVolume;
+    }
+}

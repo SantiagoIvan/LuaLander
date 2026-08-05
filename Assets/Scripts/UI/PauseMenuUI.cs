@@ -6,9 +6,31 @@ public class PauseMenuUI : MonoBehaviour
 
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button soundVolumeButton;
+    [SerializeField] private Button musicVolumeButton;
+    [SerializeField] private RightClickHandler soundVolumeRightClick;
+    [SerializeField] private RightClickHandler musicVolumeRightClick;
 
     private void Awake()
     {
+        soundVolumeButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.upSoundVolume();
+        });
+
+        musicVolumeButton.onClick.AddListener(() =>
+        {
+            MusicManager.Instance.upMusicVolume();
+        });
+        soundVolumeRightClick.OnRightClick += () =>
+        {
+            SoundManager.Instance.downSoundVolume();
+        };
+        musicVolumeRightClick.OnRightClick += () =>
+        {
+            MusicManager.Instance.downMusicVolume();
+        };
+
         resumeButton.onClick.AddListener(() =>
         {
             GameManager.Instance.resumeGame();
@@ -18,6 +40,11 @@ public class PauseMenuUI : MonoBehaviour
             SceneLoader.LoadScene(SceneLoader.Scenes.MainMenu);
         });
 
+    }
+    private void Update()
+    {
+        soundVolumeButton.GetComponentInChildren<TMPro.TMP_Text>().text = "SFX: " + SoundManager.Instance.getSoundVolume();
+        musicVolumeButton.GetComponentInChildren<TMPro.TMP_Text>().text = "Music: " + MusicManager.Instance.getMusicVolume();
     }
 
     private void Start()

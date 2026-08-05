@@ -16,6 +16,7 @@ public class Lander : MonoBehaviour
 
     
     public event EventHandler<OnCoinCollectedEventArgs> OnCoinCollected;
+    public event EventHandler OnFuelCollected;
     public event EventHandler<OnLandingEventArgs> OnLanding;
     
 
@@ -186,6 +187,7 @@ public class Lander : MonoBehaviour
             this.fuelAmount = Math.Min(this.maxFuelAmount, this.fuelAmount + fuel.getFuelAmount());
             Debug.Log("Fuel collected! New fuel level: " + this.fuelAmount);
             fuel.getConsumed();
+            OnFuelCollected?.Invoke(this, EventArgs.Empty);
         }
         if (other.gameObject.TryGetComponent<Coin>(out Coin coin))
         {
