@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1785956845
+  lastShownTimestamp: 1786060114
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1785955720
+  checkedLastUpdateTimestamp: 1786060114
   lastQOTDResponse:
     questionId: 329
     questionText: What is the main difference between the out and ref keywords? (behaviour
@@ -28,19 +28,19 @@ MonoBehaviour:
     answerC: No difference
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1785955720
+  lastQotdTimestamp: 1786060114
   lastDynamicHeaderResponse:
-    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
-    topText: Get 80% OFF on ALL my Courses and Games!!!
+    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsSoon.png
+    topText: Get 80% OFF on ALL my Courses and Games!!! (ENDS AUGUST)
     topLink: summerbundle
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1785955720
+  lastDynamicHeaderTimestamp: 1786060114
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1785955720
+  websiteLatestMessageTimestamp: 1786060114
   websiteLatestVideos:
     videos:
     - youTubeId: 2oHitHMNyNw
@@ -51,4 +51,4 @@ MonoBehaviour:
       title: TOP 10 NEW Systems and Tools JULY 2026! | Unity Asset Store
     - youTubeId: _0Lp-iXEhfU
       title: Join my Game Dev Practice Lab for FREE!
-  websiteLatestVideosTimestamp: 1785955720
+  websiteLatestVideosTimestamp: 1786060114

@@ -20,8 +20,12 @@ public class Coin : MonoBehaviour
         this.isCollected = true;
         // disparar animacion de particulas y sonido
         OnPicked?.Invoke(this, EventArgs.Empty);
-        //get destroyed after a delay
-        Destroy(gameObject, 0.5f);
+        this.DestroySelf();
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(this.gameObject, 0.5f);
     }
     
 }

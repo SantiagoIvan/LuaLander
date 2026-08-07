@@ -7,6 +7,11 @@ public class CoinVisual : MonoBehaviour
     [SerializeField] private GameObject indicatorGameObject;
     [SerializeField] private int INDICATOR_MIN_Z_ROTATION = -30;
     [SerializeField] private int INDICATOR_MAX_Z_ROTATION = 30;
+    private PeriodicFunction periodicFunction;
+
+    // Para las animaciones
+    [SerializeField] private Animator animator; // Animator del sprite (el que tiene el material SpriteFlash)
+
     private Coin coin;
 
     private void Awake()
@@ -21,6 +26,12 @@ public class CoinVisual : MonoBehaviour
         indicatorTextMeshPro.text = $"+{coin.getValue()}";
         coin.OnPicked += Coin_OnPicked;
         this.HideText(); // Hide the indicator text initially
+        float randomInterval = UnityEngine.Random.Range(1.5f, 4f);
+        Debug.Log($"{gameObject.name} - intervalo: {randomInterval}");
+        this.periodicFunction = PeriodicFunction.Create(
+            () => AnimatorTriggerExtensions.SetTrigger(animator, AnimatorTrigger.Flash)
+            , randomInterval
+         );
     }
 
     private void Coin_OnPicked(object sender, EventArgs e)
@@ -32,6 +43,7 @@ public class CoinVisual : MonoBehaviour
             int random = new System.Random().Next(this.INDICATOR_MIN_Z_ROTATION, this.INDICATOR_MAX_Z_ROTATION);
             indicatorGameObject.transform.rotation = Quaternion.Euler(0, 0, random);
             this.ShowText();
+            this.periodicFunction.DestroySelf();
         }
     }
     private void HideText()
