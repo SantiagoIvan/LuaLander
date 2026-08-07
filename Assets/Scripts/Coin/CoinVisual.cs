@@ -7,6 +7,9 @@ public class CoinVisual : MonoBehaviour
     [SerializeField] private GameObject indicatorGameObject;
     [SerializeField] private int INDICATOR_MIN_Z_ROTATION = -30;
     [SerializeField] private int INDICATOR_MAX_Z_ROTATION = 30;
+    private float minTriggerInterval = 1.5f;
+    private float maxTriggerInterval = 4f;
+
     private PeriodicFunction periodicFunction;
 
     // Para las animaciones
@@ -26,8 +29,7 @@ public class CoinVisual : MonoBehaviour
         indicatorTextMeshPro.text = $"+{coin.getValue()}";
         coin.OnPicked += Coin_OnPicked;
         this.HideText(); // Hide the indicator text initially
-        float randomInterval = UnityEngine.Random.Range(1.5f, 4f);
-        Debug.Log($"{gameObject.name} - intervalo: {randomInterval}");
+        float randomInterval = UnityEngine.Random.Range(this.minTriggerInterval, this.maxTriggerInterval);
         this.periodicFunction = PeriodicFunction.Create(
             () => AnimatorTriggerExtensions.SetTrigger(animator, AnimatorTrigger.Flash)
             , randomInterval
