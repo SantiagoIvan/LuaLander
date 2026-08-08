@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public enum AnimatorTrigger
 {
     Flash,
-    ShowIndicator,
+    Collect,
 }
 
 public static class AnimatorTriggerExtensions
@@ -14,7 +14,7 @@ public static class AnimatorTriggerExtensions
             AnimatorTrigger.Flash, Animator.StringToHash(nameof(AnimatorTrigger.Flash))
         },
         { 
-            AnimatorTrigger.ShowIndicator, Animator.StringToHash(nameof(AnimatorTrigger.ShowIndicator))
+            AnimatorTrigger.Collect, Animator.StringToHash(nameof(AnimatorTrigger.Collect))
         }
     };
 

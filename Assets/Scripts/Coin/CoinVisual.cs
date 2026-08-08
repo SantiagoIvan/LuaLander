@@ -55,7 +55,7 @@ public class CoinVisual : MonoBehaviour
     private void ShowText()
     {
         indicatorGameObject.SetActive(true);
-        AnimatorTriggerExtensions.SetTrigger(animator, AnimatorTrigger.ShowIndicator);
+        AnimatorTriggerExtensions.SetTrigger(animator, AnimatorTrigger.Collect);
     }
 
 }

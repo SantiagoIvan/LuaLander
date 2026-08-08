@@ -7,6 +7,7 @@ public class FuelVisual : MonoBehaviour
     [SerializeField] private TextMeshPro fuelAmountIndicator;
     [SerializeField] private Fuel fuel;
     [SerializeField] private ParticleSystem pickUpEffect;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
