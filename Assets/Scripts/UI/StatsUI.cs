@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class StatsUI : MonoBehaviour
 {
@@ -12,16 +13,20 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI time;
     [SerializeField] private Image fuelBar;
     private float maxFuelAmount;
+    private Lander lander;
 
     // Para las flechitas
     [SerializeField] private GameObject upArrowGameObject;
     [SerializeField] private GameObject leftArrowGameObject;
     [SerializeField] private GameObject rightArrowGameObject;
     [SerializeField] private GameObject downArrowGameObject;
+    [SerializeField] private Animator animator;
+    private static readonly int IsLowFuelHash = Animator.StringToHash("IsLowFuel");
 
     private void Start()
     {
-        this.maxFuelAmount = Lander.Instance.getMaxFuelAmount();
+        lander = Lander.Instance;
+        this.maxFuelAmount = lander.getMaxFuelAmount();
         level.text = GameManager.getCurrentLevel().ToString();
     }
 
@@ -48,9 +53,13 @@ public class StatsUI : MonoBehaviour
         speedY.text = yspeed.ToString("F2");
         
         // Actualizar el fuel
-        fuelBar.fillAmount = Lander.Instance.getFuelAmount() / this.maxFuelAmount;
+        fuelBar.fillAmount = lander.getFuelAmount() / this.maxFuelAmount;
         
         // Actualizar el tiempo
         time.text = GameManager.Instance.getTime().ToString("F0");
+
+        bool isLowFuel = lander.getFuelAmount() <= lander.getFuelThreshold();
+        animator.SetBool(IsLowFuelHash, isLowFuel);
+        Debug.Log("isLowFuel" + isLowFuel);
     }
 }

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1786148211
+  lastShownTimestamp: 1786369584
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1786148212
+  checkedLastUpdateTimestamp: 1786369584
   lastQOTDResponse:
     questionId: 330
     questionText: 'Is this valid code?
@@ -30,7 +30,7 @@ MonoBehaviour:
     answerC: 
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1786148212
+  lastQotdTimestamp: 1786369584
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsSoon.png
     topText: Get 80% OFF on ALL my Courses and Games!!! (ENDS AUGUST)
@@ -38,19 +38,19 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1786148212
+  lastDynamicHeaderTimestamp: 1786369584
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1786148212
+  websiteLatestMessageTimestamp: 1786369584
   websiteLatestVideos:
     videos:
+    - youTubeId: xsQTCKSHte8
+      title: TOP 10 NEW Games, Made with Unity! (JULY 2026)
     - youTubeId: 26F9uHlPEO0
       title: WHY this game made $10,000,000!
     - youTubeId: 2oHitHMNyNw
       title: WHY Scope Creep DESTROYS Indie Games (and how to stop it)
     - youTubeId: -1yYVVVN4as
       title: BEST NEW Visual Assets to INSPIRE YOU! (JULY 2026)
-    - youTubeId: f0BSrBhudoY
-      title: TOP 10 NEW Systems and Tools JULY 2026! | Unity Asset Store
-  websiteLatestVideosTimestamp: 1786148212
+  websiteLatestVideosTimestamp: 1786369584

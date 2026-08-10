@@ -17,7 +17,10 @@ public class Lander : MonoBehaviour
     
     public event EventHandler<OnCoinCollectedEventArgs> OnCoinCollected;
     public event EventHandler OnFuelCollected;
+    public event EventHandler OnLowFuel;
+    public event EventHandler OnOutOfFuel;
     public event EventHandler<OnLandingEventArgs> OnLanding;
+    
     
 
     private Rigidbody2D landerRigidbody2D;
@@ -30,6 +33,7 @@ public class Lander : MonoBehaviour
     [SerializeField] private float maxFuelAmount = 120f;
     [SerializeField] private float NORMAL_GRAVITY_SCALE = 1f;
     [SerializeField] private float PAD_MOVEMENT_THRESHOLD = 0.4f; // Umbral para considerar que el pad de movimiento esta siendo presionado
+    private float fuelThreshold = 20f; // Umbral para emitir evento de low fuel
     private State state;
 
 
@@ -53,6 +57,21 @@ public class Lander : MonoBehaviour
         Debug.Log("Lander has spawned with following stats: Fuel=" + this.fuelAmount + ", Gravity=" + this.NORMAL_GRAVITY_SCALE + ", AccRate=" + this.accelerationRate);
         GameManager.Instance.OnTimeOut += GameManager_OnTimeOut;
     }
+
+    private void Update()
+    {
+        if(this.fuelAmount <= 0)
+        {
+            OnOutOfFuel?.Invoke(this, EventArgs.Empty);
+            return;
+        }
+        if (this.fuelAmount < this.fuelThreshold)
+        {
+            OnLowFuel?.Invoke(this, EventArgs.Empty);
+        }
+
+    }
+
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     // No corre en cada update, sino en intervalos fijos de tiempo. Se recomienda usarlo para código de física.
     // Estamos analizando si la tecla esta siendo presionada (isPressed), por lo tanto podemos realizarlo en FixedUpdate.
@@ -202,7 +221,7 @@ public class Lander : MonoBehaviour
     {
         return this.fuelAmount;
     }
-
+    public float getFuelThreshold() { return this.fuelThreshold; }
     public float getSpeedX()
     {
         return this.landerRigidbody2D.linearVelocity.x;
