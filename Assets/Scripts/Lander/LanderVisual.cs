@@ -11,6 +11,11 @@ public class LanderVisual : MonoBehaviour
     [SerializeField] private ParticleSystem leftThrusterParticleSystem;
     [SerializeField] private ParticleSystem middleThrusterParticleSystem;
     [SerializeField] private ParticleSystem rightThrusterParticleSystem;
+
+    [SerializeField] private ParticleSystem leftSmokeParticleSystem;
+    [SerializeField] private ParticleSystem middleSmokeParticleSystem;
+    [SerializeField] private ParticleSystem rightSmokeParticleSystem;
+
     [SerializeField] private GameObject explosionVFX;
 
 
@@ -26,10 +31,15 @@ public class LanderVisual : MonoBehaviour
         lander.OnRightForce += Lander_OnRightForce;
         lander.OnBeforeForceApplied += Lander_OnBeforeForceApplied;
         lander.OnLanding += Lander_OnLanding;
+        lander.OnOutOfFuel += Lander_OnOutOfFuel;
+        lander.OnFuelCollected += Lander_OnFuelCollected;
 
         setThrusterParticleSystem(leftThrusterParticleSystem, false);
         setThrusterParticleSystem(middleThrusterParticleSystem, false);
         setThrusterParticleSystem(rightThrusterParticleSystem, false);
+        setThrusterParticleSystem(leftSmokeParticleSystem, false);
+        setThrusterParticleSystem(middleSmokeParticleSystem, false);
+        setThrusterParticleSystem(rightSmokeParticleSystem, false);
     }
 
     private void Lander_OnLanding(object sender, OnLandingEventArgs landingObj)
@@ -74,5 +84,28 @@ public class LanderVisual : MonoBehaviour
     private void Lander_OnRightForce(object sender, EventArgs e)
     {
         setThrusterParticleSystem(leftThrusterParticleSystem, true);
+    }
+    private void Lander_OnOutOfFuel(object sender, EventArgs e)
+    {
+        activateSmokeParticleSystem();
+    }
+    private void activateSmokeParticleSystem()
+    {
+        setThrusterParticleSystem(leftSmokeParticleSystem, true);
+        setThrusterParticleSystem(rightSmokeParticleSystem, true);
+        setThrusterParticleSystem(middleSmokeParticleSystem, true);
+    }
+    private void deactivateSmokeParticleSystem()
+    {
+        setThrusterParticleSystem(leftSmokeParticleSystem, false);
+        setThrusterParticleSystem(rightSmokeParticleSystem, false);
+        setThrusterParticleSystem(middleSmokeParticleSystem, false);
+    }
+    private void Lander_OnFuelCollected(object sender, EventArgs e)
+    {
+        if (lander.getFuelAmount() > lander.getFuelThreshold())
+        {
+            this.deactivateSmokeParticleSystem();
+        }
     }
 }

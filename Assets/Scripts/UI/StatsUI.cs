@@ -60,6 +60,5 @@ public class StatsUI : MonoBehaviour
 
         bool isLowFuel = lander.getFuelAmount() <= lander.getFuelThreshold();
         animator.SetBool(IsLowFuelHash, isLowFuel);
-        Debug.Log("isLowFuel" + isLowFuel);
     }
 }
