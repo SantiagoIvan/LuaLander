@@ -4012,6 +4012,7 @@ GameObject:
   - component: {fileID: 836302382}
   - component: {fileID: 836302381}
   - component: {fileID: 836302383}
+  - component: {fileID: 836302384}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -4155,6 +4156,21 @@ MonoBehaviour:
   scaleAmount: 0.15
   scaleSpeed: 5
   letterDelay: 0.15
+--- !u!114 &836302384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836302379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d485ae438c386a4cad82b00a7547e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextGlowLoopUI
+  minGlow: 0
+  maxGlow: 48.59
+  glowSpeed: 3
 --- !u!1 &862746712
 GameObject:
   m_ObjectHideFlags: 0
@@ -4222,6 +4238,7 @@ MonoBehaviour:
   nextButtonText: {fileID: 1103724859}
   centerPosition: {fileID: 1620493193}
   showFinalScoreButton: {fileID: 170687626}
+  titleGlow: {fileID: 836302384}
 --- !u!1 &873259839
 GameObject:
   m_ObjectHideFlags: 0

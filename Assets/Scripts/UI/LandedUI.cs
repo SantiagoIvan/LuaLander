@@ -16,6 +16,7 @@ public class LandedUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nextButtonText;
     [SerializeField] private Transform centerPosition;
     [SerializeField] private Button showFinalScoreButton;
+    [SerializeField] private TextGlowLoopUI titleGlow;
 
     private Action nextButtonClickAction;
     private void Awake()
@@ -50,6 +51,13 @@ public class LandedUI : MonoBehaviour
         {
             title.text = "Landing Successful!";
             title.color = Color.white; // White color for success
+
+            // Todo Monobehaviour hereda la propiedad enabled, que es lo que apaga un script en concreto de un componente, dejando de ejecutar sus updates y demas.qq
+            if (titleGlow != null)
+            {
+                titleGlow.enabled = true;
+            }
+
             if (GameManager.Instance.isLastLevel())
             {
                 nextButton.gameObject.SetActive(false);
@@ -68,6 +76,10 @@ public class LandedUI : MonoBehaviour
         {
             title.text = "Landing Failed!";
             title.color = new Color(205f / 255f, 34f / 255f, 34f / 255f, 1f); // #CD2222 in Unity's Color format
+            if (titleGlow != null)
+            {
+                titleGlow.enabled = false;
+            }
             nextButtonText.text = "Restart";
             nextButtonClickAction = GameManager.Instance.restartLevel;
         }
