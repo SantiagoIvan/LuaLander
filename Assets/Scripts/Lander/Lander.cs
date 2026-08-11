@@ -73,6 +73,10 @@ public class Lander : MonoBehaviour
 
     }
 
+    public State getState()
+    {
+        return this.state;
+    }
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     // No corre en cada update, sino en intervalos fijos de tiempo. Se recomienda usarlo para código de física.
     // Estamos analizando si la tecla esta siendo presionada (isPressed), por lo tanto podemos realizarlo en FixedUpdate.

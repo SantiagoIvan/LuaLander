@@ -15,10 +15,11 @@ public class GameManager : MonoBehaviour
     // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
     private static int currentLevel = 1; 
     private static int finalScore = 0; 
-    private static float startingTime = 30f; 
+    private static float startingTime = 10f; 
     private static float startingFuelLimit = 100f;
     private static float startingGravity = 1f;
     private static int startingAccRate = 1000;
+    private static float lowTimeThreshold = 5f;
 
     [SerializeField] private List<GameLevel> gameLevelList;
     [SerializeField] private CinemachineCameraHandler cinemachineCameraHandler;
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnTimeOut;
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameResumed;
+    public event EventHandler OnLowTime;
+    private bool lowTimeTriggered = false;
 
     public static GameManager Instance { get; private set; }
 
@@ -93,6 +96,11 @@ public class GameManager : MonoBehaviour
         if(this.time > 0 && this.state == State.Normal)
         {
             this.time -= Time.deltaTime;
+            if (this.time < lowTimeThreshold && !lowTimeTriggered)
+            {
+                this.OnLowTime?.Invoke(this, EventArgs.Empty);
+                lowTimeTriggered = true;
+            }
         } else if (this.time <= 0 && this.state == State.Normal)
         {
             this.state = State.GameOver;
@@ -150,6 +158,7 @@ public class GameManager : MonoBehaviour
         Lander.Instance.transform.position = landerPosition.position;
         this.cinemachineCameraHandler.levelLoaded(gameLevel);
         Time.timeScale = 1f;
+        this.lowTimeTriggered = false;
         
     }
 

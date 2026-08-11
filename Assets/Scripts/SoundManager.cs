@@ -6,11 +6,10 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     [SerializeField] private AudioClip fuelPickupSound;
-    [SerializeField] private AudioClip lowFuelWarning;
-    [SerializeField] private AudioClip outOfFuel;
     [SerializeField] private AudioClip coinPickupSound;
     [SerializeField] private AudioClip crashSound;
     [SerializeField] private AudioClip successfulLanding;
+    [SerializeField] private AudioClip almostUpSound;
     [SerializeField] private static float soundVolume = 5f;
     private static float maxSoundVolume = 10f;
 
@@ -29,8 +28,7 @@ public class SoundManager : MonoBehaviour
         Lander.Instance.OnFuelCollected += Lander_OnFuelCollected;
         Lander.Instance.OnCoinCollected += Lander_OnCoinCollected;
         Lander.Instance.OnLanding += Lander_OnLanding;
-        Lander.Instance.OnLowFuel += Lander_OnLowFuel;
-        Lander.Instance.OnOutOfFuel += Lander_OnOutOfFuel;
+        GameManager.Instance.OnLowTime += GameManager_OnLowTime;
     }
     public void setSoundVolume(int newSoundVolume)
     {
@@ -47,21 +45,6 @@ public class SoundManager : MonoBehaviour
     private void Lander_OnFuelCollected(object sender, OnFuelCollectedEventArgs e)
     {
         AudioSource.PlayClipAtPoint(fuelPickupSound, Lander.Instance.transform.position, this.getNormalizedSoundVolume()); // Spawnea un sound object que le digas para reproducir el sonido.
-        if (!Lander.Instance.isFuelLow())
-        {
-            // Stop LowFUelWarning or OutOfFuel AudioSource
-            this.currentWarning.Stop();
-        }
-    }
-    private void Lander_OnLowFuel(object sender, EventArgs e)
-    {
-        // Play LowFuelWarning AudioSource in loop
-        this.playWarning(this.lowFuelWarning);
-    }
-    private void Lander_OnOutOfFuel(object sender, EventArgs e)
-    {
-        // Play OutOfFuel AudioClip in loop and stop LowFuelWarning AudioSource
-        this.playWarning(this.outOfFuel);
     }
     private void Lander_OnCoinCollected(object sender, OnCoinCollectedEventArgs e)
     {
@@ -95,15 +78,10 @@ public class SoundManager : MonoBehaviour
     {
         return soundVolume / maxSoundVolume;
     }
-    private void playWarning(AudioClip src)
+    private void GameManager_OnLowTime(object sender, EventArgs e)
     {
-        
-        if(this.currentWarning != null && this.currentWarning.clip == src && this.currentWarning.isPlaying) 
-            return;
+        AudioSource.PlayClipAtPoint(almostUpSound, Lander.Instance.transform.position, this.getNormalizedSoundVolume());
 
-        this.currentWarning.clip = src;
-        this.currentWarning.loop = true;
-        this.currentWarning.volume = this.getNormalizedSoundVolume();
-        this.currentWarning.Play();
     }
+
 }
