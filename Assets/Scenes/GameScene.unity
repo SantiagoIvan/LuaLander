@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   animator: {fileID: 14518576}
+  lowFuelTextMeshPro: {fileID: 1226808558}
 --- !u!1 &63185832
 GameObject:
   m_ObjectHideFlags: 0
@@ -5624,7 +5625,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 66006
+    rgba: 4278256086
   m_fontColor: {r: 0.8396226, g: 0.0039604935, b: 0.0039604935, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

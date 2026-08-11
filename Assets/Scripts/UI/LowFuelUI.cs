@@ -1,10 +1,13 @@
 using UnityEngine;
 using System;
+using TMPro;
 
 public class LowFuelUI : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private TextMeshProUGUI lowFuelTextMeshPro;
     private string animatorWarningParameterName = "IsLowFuel";
+    
     private Lander lander;
 
     private void Start()
@@ -16,6 +19,7 @@ public class LowFuelUI : MonoBehaviour
     }
     private void Lander_OnLowFuel(object sender, EventArgs e)
     {
+        this.lowFuelTextMeshPro.text = "LOW FUEL";
         this.updateAnimator();
     }
     private void Lander_OnFuelCollected(object sender, OnFuelCollectedEventArgs e)
@@ -24,11 +28,10 @@ public class LowFuelUI : MonoBehaviour
     }
     private void Lander_OnOutOfFuel(object sender, EventArgs e)
     {
-
+        this.lowFuelTextMeshPro.text = "OUT OF FUEL";
     }
     private void updateAnimator()
     {
-        Debug.Log("Low fuel is "+ animatorWarningParameterName + " and its value is " + lander.isFuelLow());
         this.animator.SetBool(animatorWarningParameterName, lander.isFuelLow());
     }
 }
