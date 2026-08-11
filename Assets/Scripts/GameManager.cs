@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
     private static int currentLevel = 1; 
     private static int finalScore = 0; 
-    private static float startingTime = 10f; 
+    private static float startingTime = 20f; 
     private static float startingFuelLimit = 100f;
     private static float startingGravity = 1f;
     private static int startingAccRate = 1000;

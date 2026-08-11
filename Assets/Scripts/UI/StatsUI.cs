@@ -22,7 +22,8 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private GameObject rightArrowGameObject;
     [SerializeField] private GameObject downArrowGameObject;
     [SerializeField] private Animator animator;
-    private static readonly int IsLowFuelHash = Animator.StringToHash("IsLowFuel");
+    private static readonly int IsFuelLowHash = Animator.StringToHash("IsFuelLow");
+    private static readonly int IsTimeLowHash = Animator.StringToHash("IsTimeLow");
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class StatsUI : MonoBehaviour
         this.maxFuelAmount = lander.getMaxFuelAmount();
         level.text = GameManager.getCurrentLevel().ToString();
         lander.OnLowFuel += Lander_OnLowFuel;
+        GameManager.Instance.OnLowTime += GameManager_OnLowTime;
     }
 
     private void Update()
@@ -60,15 +62,15 @@ public class StatsUI : MonoBehaviour
         // Actualizar el tiempo
         time.text = GameManager.Instance.getTime().ToString("F0");
 
-        animator.SetBool(IsLowFuelHash, lander.isFuelLow());
+        animator.SetBool(IsFuelLowHash, lander.isFuelLow());
         
     }
     private void Lander_OnLowFuel(object sender, EventArgs e)
     {
-        animator.SetBool(IsLowFuelHash, lander.isFuelLow());
+        animator.SetBool(IsFuelLowHash, lander.isFuelLow());
     }
-    private void Lander_OnOutOfFuel(object sender, EventArgs e)
+    private void GameManager_OnLowTime(object sender, EventArgs e)
     {
-
+        animator.SetBool(IsTimeLowHash, true);
     }
 }
