@@ -12,6 +12,7 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speedY;
     [SerializeField] private TextMeshProUGUI time;
     [SerializeField] private Image fuelBar;
+    [SerializeField] private LowFuelUI lowFuelUI;
     private float maxFuelAmount;
     private Lander lander;
 
@@ -28,6 +29,7 @@ public class StatsUI : MonoBehaviour
         lander = Lander.Instance;
         this.maxFuelAmount = lander.getMaxFuelAmount();
         level.text = GameManager.getCurrentLevel().ToString();
+        lander.OnLowFuel += Lander_OnLowFuel;
     }
 
     private void Update()
@@ -58,7 +60,15 @@ public class StatsUI : MonoBehaviour
         // Actualizar el tiempo
         time.text = GameManager.Instance.getTime().ToString("F0");
 
-        bool isLowFuel = lander.getFuelAmount() <= lander.getFuelThreshold();
-        animator.SetBool(IsLowFuelHash, isLowFuel);
+        animator.SetBool(IsLowFuelHash, lander.isFuelLow());
+        
+    }
+    private void Lander_OnLowFuel(object sender, EventArgs e)
+    {
+        animator.SetBool(IsLowFuelHash, lander.isFuelLow());
+    }
+    private void Lander_OnOutOfFuel(object sender, EventArgs e)
+    {
+
     }
 }

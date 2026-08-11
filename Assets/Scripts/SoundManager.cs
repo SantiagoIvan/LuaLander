@@ -44,10 +44,10 @@ public class SoundManager : MonoBehaviour
     {
         return maxSoundVolume;
     }
-    private void Lander_OnFuelCollected(object sender, EventArgs e)
+    private void Lander_OnFuelCollected(object sender, OnFuelCollectedEventArgs e)
     {
         AudioSource.PlayClipAtPoint(fuelPickupSound, Lander.Instance.transform.position, this.getNormalizedSoundVolume()); // Spawnea un sound object que le digas para reproducir el sonido.
-        if (Lander.Instance.getFuelAmount() > Lander.Instance.getFuelThreshold())
+        if (!Lander.Instance.isFuelLow())
         {
             // Stop LowFUelWarning or OutOfFuel AudioSource
             this.currentWarning.Stop();

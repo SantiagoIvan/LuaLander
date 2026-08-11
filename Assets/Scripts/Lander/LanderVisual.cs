@@ -101,7 +101,7 @@ public class LanderVisual : MonoBehaviour
         setThrusterParticleSystem(rightSmokeParticleSystem, false);
         setThrusterParticleSystem(middleSmokeParticleSystem, false);
     }
-    private void Lander_OnFuelCollected(object sender, EventArgs e)
+    private void Lander_OnFuelCollected(object sender, OnFuelCollectedEventArgs e)
     {
         if (lander.getFuelAmount() > lander.getFuelThreshold())
         {

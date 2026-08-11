@@ -16,9 +16,10 @@ public class Lander : MonoBehaviour
 
     
     public event EventHandler<OnCoinCollectedEventArgs> OnCoinCollected;
-    public event EventHandler OnFuelCollected;
+    public event EventHandler<OnFuelCollectedEventArgs> OnFuelCollected;
     public event EventHandler OnLowFuel;
     public event EventHandler OnOutOfFuel;
+    public event EventHandler OnFuelRestored;
     public event EventHandler<OnLandingEventArgs> OnLanding;
     
     
@@ -206,7 +207,7 @@ public class Lander : MonoBehaviour
             this.fuelAmount = Math.Min(this.maxFuelAmount, this.fuelAmount + fuel.getFuelAmount());
             Debug.Log("Fuel collected! New fuel level: " + this.fuelAmount);
             fuel.getConsumed();
-            OnFuelCollected?.Invoke(this, EventArgs.Empty);
+            OnFuelCollected?.Invoke(this, new OnFuelCollectedEventArgs{ landerFuelUpdated = this.fuelAmount });
         }
         if (other.gameObject.TryGetComponent<Coin>(out Coin coin))
         {
@@ -260,5 +261,9 @@ public class Lander : MonoBehaviour
     private void GameManager_OnTimeOut(object sender, EventArgs e)
     {
         this.failLanding(LandingResult.TimeOut);
+    }
+    public bool isFuelLow()
+    {
+        return this.fuelAmount < this.fuelThreshold;
     }
 }
