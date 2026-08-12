@@ -20,7 +20,6 @@ public class LightPanel : MonoBehaviour
         {
             animator.SetTrigger(lightUpTrigger);
             this.computeRandomTimer();
-            Debug.Log("Animation Panel triggered. Next in " + timer.ToString());
         }
     }
     private void computeRandomTimer()

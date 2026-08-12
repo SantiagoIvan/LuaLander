@@ -19,7 +19,6 @@ public class Lander : MonoBehaviour
     public event EventHandler<OnFuelCollectedEventArgs> OnFuelCollected;
     public event EventHandler OnLowFuel;
     public event EventHandler OnOutOfFuel;
-    public event EventHandler OnFuelRestored;
     public event EventHandler<OnLandingEventArgs> OnLanding;
     
     
