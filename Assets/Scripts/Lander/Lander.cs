@@ -24,17 +24,22 @@ public class Lander : MonoBehaviour
     
 
     private Rigidbody2D landerRigidbody2D;
+    private State state;
+    private float fuelThreshold = 20f; // Umbral para emitir evento de low fuel
+
+    // Lander stats
     [SerializeField] private int rotationRate = 50;
     [SerializeField] private int accelerationRate;
+    [SerializeField] private float maxFuelAmount = 120f;
+    [SerializeField] private float maxTurboAmount = 40f;
+    [SerializeField] private float turbo = 40f;
+
     [SerializeField] private float softLandingVelocityMagitude = 3.5f; // Maxima velocidad permitida al aterrizar
     [SerializeField] private float minDotVector = 0.9f; // Minimo producto cartesiano entre el vector canonico y global y el transform.y del lander para considerar que esta vertical
     [SerializeField] private float fuelAmount = 100f; // Cantidad de combustible inicial
     [SerializeField] private float fuelConsumptionRate = 10f; // Cantidad de combustible consumido por segundo al aplicar fuerza
-    [SerializeField] private float maxFuelAmount = 120f;
     [SerializeField] private float NORMAL_GRAVITY_SCALE = 1f;
     [SerializeField] private float PAD_MOVEMENT_THRESHOLD = 0.4f; // Umbral para considerar que el pad de movimiento esta siendo presionado
-    private float fuelThreshold = 20f; // Umbral para emitir evento de low fuel
-    private State state;
 
 
     // Para referencias locales
@@ -56,20 +61,6 @@ public class Lander : MonoBehaviour
         this.accelerationRate = GameManager.getAccRate();
         Debug.Log("Lander has spawned with following stats: Fuel=" + this.fuelAmount + ", Gravity=" + this.NORMAL_GRAVITY_SCALE + ", AccRate=" + this.accelerationRate);
         GameManager.Instance.OnTimeOut += GameManager_OnTimeOut;
-    }
-
-    private void Update()
-    {
-        if(this.fuelAmount <= 0)
-        {
-            OnOutOfFuel?.Invoke(this, EventArgs.Empty);
-            return;
-        }
-        if (this.fuelAmount < this.fuelThreshold)
-        {
-            OnLowFuel?.Invoke(this, EventArgs.Empty);
-        }
-
     }
 
     public State getState()
@@ -197,9 +188,16 @@ public class Lander : MonoBehaviour
         if (fuelAmount > 0)
         {
             fuelAmount -= fuelConsumptionRate * Time.fixedDeltaTime;
-        } else
+        }
+        
+        if (this.fuelAmount <= 0)
         {
-            Debug.Log("Out of fuel!");
+            OnOutOfFuel?.Invoke(this, EventArgs.Empty);
+            return;
+        }
+        if (this.fuelAmount < this.fuelThreshold)
+        {
+            OnLowFuel?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -34,6 +34,10 @@ public class GameInput : MonoBehaviour
     {
         return inputActions.Player.LanderLeft.IsPressed();
     }
+    public bool isSpaceActionPressed()
+    {
+        return inputActions.Player.LanderTurbo.IsPressed();
+    }
     public Vector2 getMovementInputVector2()
     {
         return inputActions.Player.MovementPad.ReadValue<Vector2>();

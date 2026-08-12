@@ -136,6 +136,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LanderTurbo"",
+                    ""type"": ""Button"",
+                    ""id"": ""78aa51aa-efe0-439c-86c9-9469a0927124"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -226,6 +235,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59858919-196f-4042-92a5-04388c129fc9"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LanderTurbo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -239,6 +259,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_LanderLeft = m_Player.FindAction("LanderLeft", throwIfNotFound: true);
         m_Player_MovementPad = m_Player.FindAction("MovementPad", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_LanderTurbo = m_Player.FindAction("LanderTurbo", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -324,6 +345,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LanderLeft;
     private readonly InputAction m_Player_MovementPad;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_LanderTurbo;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -355,6 +377,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/LanderTurbo".
+        /// </summary>
+        public InputAction @LanderTurbo => m_Wrapper.m_Player_LanderTurbo;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -396,6 +422,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @LanderTurbo.started += instance.OnLanderTurbo;
+            @LanderTurbo.performed += instance.OnLanderTurbo;
+            @LanderTurbo.canceled += instance.OnLanderTurbo;
         }
 
         /// <summary>
@@ -422,6 +451,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @LanderTurbo.started -= instance.OnLanderTurbo;
+            @LanderTurbo.performed -= instance.OnLanderTurbo;
+            @LanderTurbo.canceled -= instance.OnLanderTurbo;
         }
 
         /// <summary>
@@ -497,5 +529,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LanderTurbo" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLanderTurbo(InputAction.CallbackContext context);
     }
 }
