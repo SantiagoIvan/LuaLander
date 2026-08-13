@@ -206,10 +206,17 @@ public class Lander : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<Fuel>(out Fuel fuel))
         {
-            fuelMeter.Add(fuel.getFuelAmount());
+            fuelMeter.Add(fuel.getAmount());
             Debug.Log("Fuel collected! New fuel level: " + fuelMeter.GetAmount());
             fuel.getConsumed();
             OnFuelCollected?.Invoke(this, new OnFuelCollectedEventArgs { landerFuelUpdated = fuelMeter.GetAmount() });
+        }
+        if (other.gameObject.TryGetComponent<Turbo>(out Turbo turbo))
+        {
+            turboMeter.Add(turbo.getAmount());
+            Debug.Log("Turbo collected! New fuel level: " + turboMeter.GetAmount());
+            turbo.getConsumed();
+            OnTurboCollected?.Invoke(this, EventArgs.Empty);
         }
         if (other.gameObject.TryGetComponent<Coin>(out Coin coin))
         {

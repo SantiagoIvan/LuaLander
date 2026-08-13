@@ -1,9 +1,9 @@
 using UnityEngine;
 using System;
 
-public class Fuel : MonoBehaviour
+public class Turbo : MonoBehaviour
 {
-    [SerializeField] private float amount = 50f; // Cantidad de combustible inicial
+    [SerializeField] private float amount = 10f; // Cantidad de combustible inicial
     public event EventHandler OnConsumed;
 
     public float getAmount()

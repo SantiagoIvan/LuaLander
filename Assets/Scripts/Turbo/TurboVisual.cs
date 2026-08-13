@@ -2,25 +2,25 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class FuelVisual : MonoBehaviour
+public class TurboVisual : MonoBehaviour
 {
     [SerializeField] private TextMeshPro amountIndicator;
-    [SerializeField] private Fuel fuel;
+    [SerializeField] private Turbo turbo;
     [SerializeField] private ParticleSystem pickUpEffect;
     [SerializeField] private Animator animator;
 
     private void Awake()
     {
-        fuel = GetComponent<Fuel>();
+        turbo = GetComponent<Turbo>();
         amountIndicator = GetComponentInChildren<TextMeshPro>();
-        amountIndicator.text = "+" + fuel.getAmount().ToString();
+        amountIndicator.text = "+" + turbo.getAmount().ToString();
 
-        fuel.OnConsumed += Fuel_GetConsumed;
+        turbo.OnConsumed += Turbo_GetConsumed;
     }
 
-    private void Fuel_GetConsumed(object sender, EventArgs e)
+    private void Turbo_GetConsumed(object sender, EventArgs e)
     {
-        Debug.Log("Fuel consumption animation triggered. Falta animacion y sonidito.");
+        Debug.Log("Turbo consumption animation triggered. Falta animacion y sonidito.");
         if (pickUpEffect != null)
         {
             // Hacer la animacion de las particulas

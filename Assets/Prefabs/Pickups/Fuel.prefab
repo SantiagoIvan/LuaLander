@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0f4a88098a74b4da457d9887e33a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fuel
-  fuelAmount: 50
+  amount: 50
 --- !u!114 &7804349563960059657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63b583049688c649b8a5be78dc0c7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FuelVisual
-  fuelAmountIndicator: {fileID: 3358082228773060400}
+  amountIndicator: {fileID: 3358082228773060400}
   fuel: {fileID: 3988686813301275794}
   pickUpEffect: {fileID: 0}
   animator: {fileID: 668696511632569806}

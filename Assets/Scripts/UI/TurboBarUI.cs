@@ -17,7 +17,6 @@ public class TurboBarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Turbo level: " + lander.getTurboAmount());
         // Actualizar el turbo
         turboBar.fillAmount = lander.getTurboAmount() / lander.getMaxTurboAmount();
         animator.SetBool(IsTurboLowHash, Lander.Instance.isTurboLow());
