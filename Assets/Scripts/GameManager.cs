@@ -7,7 +7,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     private int score = 0;
-    [SerializeField] private float time = 30f;
+    private float time;
     private State state = State.WaitingToStart;
 
     // El game manager tiene un nivel actual y tiene la lista de GameLevels posibles (los prefabs)
@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     // Estatico para que persista entre escenas, sino, al actualizar el nivel y cargar nuevamente la escena, el objeto se destruye y se vuelve a crear con el default.
     private static int currentLevel = 1; 
     private static int finalScore = 0; 
-    private static float startingTime = 20f; 
     private static float startingFuelLimit = 100f;
+    private static float startingTurboLimit = 40f;
     private static float startingGravity = 1f;
     private static int startingAccRate = 1000;
     private static float lowTimeThreshold = 5f;
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameLevel> gameLevelList;
     [SerializeField] private CinemachineCameraHandler cinemachineCameraHandler;
     [SerializeField] private int testLevel = 0;
+    [SerializeField] private static float startingTime = 10f;
 
 
     public event EventHandler OnTimeOut;
@@ -38,22 +39,17 @@ public class GameManager : MonoBehaviour
     {
         return startingTime;
     }
+    public static float getStartingTurboLimit() => startingTurboLimit;
     public static void setStartingTime(float newStartingTime)
     {
         startingTime = newStartingTime;
     }
-    public static float getStartingFuelLimit()
-    {
-        return startingFuelLimit;
-    }
+    public static float getStartingFuelLimit() => startingFuelLimit;
     public static void setStartingFuelLimit(float newStartingFuelLimit)
     {
         startingFuelLimit = newStartingFuelLimit;
     }
-    public static float getStartingGravity()
-    {
-        return startingGravity;
-    }
+    public static float getStartingGravity() => startingGravity;
     public static void setStartingGravity(float newStartingGravity)
     {
         startingGravity = newStartingGravity;
@@ -62,10 +58,7 @@ public class GameManager : MonoBehaviour
     {
         startingAccRate = newAccRate;
     }
-    public static int getAccRate()
-    {
-        return startingAccRate;
-    }
+    public static int getAccRate() => startingAccRate;
 
     private void Awake()
     {
@@ -108,10 +101,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int getScore()
-    {
-        return this.score;
-    }
+    public int getScore() => score;
 
     public void addScore(int points)
     {

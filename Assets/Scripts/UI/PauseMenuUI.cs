@@ -43,8 +43,6 @@ public class PauseMenuUI : MonoBehaviour
         {
             SceneLoader.LoadScene(SceneLoader.Scenes.MainMenu);
         });
-        updateMusicVolume();
-        updateSoundVolume();
 
     }
     private void updateSoundVolume()
@@ -58,6 +56,8 @@ public class PauseMenuUI : MonoBehaviour
 
     private void Start()
     {
+        updateMusicVolume();
+        updateSoundVolume();
         GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
         GameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
         resumeButton.Select();

@@ -34,7 +34,7 @@ public class GameInput : MonoBehaviour
     {
         return inputActions.Player.LanderLeft.IsPressed();
     }
-    public bool isSpaceActionPressed()
+    public bool isLanderTurboActionPressed()
     {
         return inputActions.Player.LanderTurbo.IsPressed();
     }

@@ -13,7 +13,6 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI time;
     [SerializeField] private Image fuelBar;
     [SerializeField] private LowFuelUI lowFuelUI;
-    private float maxFuelAmount;
     private Lander lander;
 
     // Para las flechitas
@@ -28,9 +27,9 @@ public class StatsUI : MonoBehaviour
     private void Start()
     {
         lander = Lander.Instance;
-        this.maxFuelAmount = lander.getMaxFuelAmount();
         level.text = GameManager.getCurrentLevel().ToString();
         lander.OnLowFuel += Lander_OnLowFuel;
+        lander.OnLowTurbo += Lander_OnLowTurbo;
         GameManager.Instance.OnLowTime += GameManager_OnLowTime;
     }
 
@@ -57,13 +56,16 @@ public class StatsUI : MonoBehaviour
         speedY.text = yspeed.ToString("F2");
         
         // Actualizar el fuel
-        fuelBar.fillAmount = lander.getFuelAmount() / this.maxFuelAmount;
-        
+        fuelBar.fillAmount = lander.getFuelAmount() / lander.getMaxFuelAmount();
+
         // Actualizar el tiempo
         time.text = GameManager.Instance.getTime().ToString("F0");
 
+        // Actualiza el turbo
+        // turboBar
+
         animator.SetBool(IsFuelLowHash, lander.isFuelLow());
-        
+        // falta el animator del turbo
     }
     private void Lander_OnLowFuel(object sender, EventArgs e)
     {
@@ -71,6 +73,11 @@ public class StatsUI : MonoBehaviour
     }
     private void GameManager_OnLowTime(object sender, EventArgs e)
     {
-        animator.SetBool(IsTimeLowHash, true);
+        Debug.Log("Gametime is low");
+        animator.SetBool(IsTimeLowHash, true); // TODO Corregir animator porque solo puede estar este o el fuelBar animado. Tal vez hay que separar en animators
+    }
+    private void Lander_OnLowTurbo(object sender, EventArgs e)
+    {
+        Debug.Log("Turbo level: " + lander.getTurboAmount());
     }
 }

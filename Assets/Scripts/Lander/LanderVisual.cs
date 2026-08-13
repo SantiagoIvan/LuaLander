@@ -18,9 +18,15 @@ public class LanderVisual : MonoBehaviour
 
     [SerializeField] private GameObject explosionVFX;
 
+    private readonly static string BASE_COLOR = "#FFFFFF";
+    private readonly static string TURBO_COLOR = "#003AFF";
+
+    // Colores ya parseados una sola vez en Awake, para no parsear el string cada vez que se usan
+    private Color baseColor;
+    private Color turboColor;
 
     private Lander lander; // tambien se puede hacer serializeField
-    
+
 
     private void Awake()
     {
@@ -33,6 +39,18 @@ public class LanderVisual : MonoBehaviour
         lander.OnLanding += Lander_OnLanding;
         lander.OnOutOfFuel += Lander_OnOutOfFuel;
         lander.OnFuelCollected += Lander_OnFuelCollected;
+        lander.OnTurboPressed += Lander_OnTurboPressed;
+
+        if (!ColorUtility.TryParseHtmlString(BASE_COLOR, out baseColor))
+        {
+            Debug.LogWarning($"No se pudo parsear BASE_COLOR ({BASE_COLOR}), usando blanco por defecto.");
+            baseColor = Color.white;
+        }
+        if (!ColorUtility.TryParseHtmlString(TURBO_COLOR, out turboColor))
+        {
+            Debug.LogWarning($"No se pudo parsear TURBO_COLOR ({TURBO_COLOR}), usando rojo por defecto.");
+            turboColor = Color.red;
+        }
 
         setThrusterParticleSystem(leftThrusterParticleSystem, false);
         setThrusterParticleSystem(middleThrusterParticleSystem, false);
@@ -60,13 +78,30 @@ public class LanderVisual : MonoBehaviour
     {
         ParticleSystem.EmissionModule emission = particleSystem.emission;
         emission.enabled = enabled;
+
+    }
+
+    /// <summary>
+    /// Setea el StartColor de un ParticleSystem. Hay que guardar el "main" en una
+    /// variable local antes de modificarlo: es un struct devuelto por valor, no se
+    /// puede encadenar la asignacion directo sobre particleSystem.main.startColor.
+    /// </summary>
+    private void setThrusterStartColor(ParticleSystem particleSystem, Color color)
+    {
+        ParticleSystem.MainModule main = particleSystem.main;
+        main.startColor = new ParticleSystem.MinMaxGradient(color);
     }
 
     private void Lander_OnBeforeForceApplied(object sender, EventArgs e)
     {
+        // Apaga las particulas de fuel/turbo. Las de humito salen siempre cuando estas out orf fuel
         setThrusterParticleSystem(middleThrusterParticleSystem, false);
         setThrusterParticleSystem(leftThrusterParticleSystem, false);
         setThrusterParticleSystem(rightThrusterParticleSystem, false);
+
+        setThrusterStartColor(leftThrusterParticleSystem, baseColor);
+        setThrusterStartColor(rightThrusterParticleSystem, baseColor);
+        setThrusterStartColor(middleThrusterParticleSystem, baseColor);
     }
 
     private void Lander_OnUpForce(object sender, EventArgs e)
@@ -84,6 +119,12 @@ public class LanderVisual : MonoBehaviour
     private void Lander_OnRightForce(object sender, EventArgs e)
     {
         setThrusterParticleSystem(leftThrusterParticleSystem, true);
+    }
+    private void Lander_OnTurboPressed(object sender, EventArgs e)
+    {
+        setThrusterStartColor(leftThrusterParticleSystem, turboColor);
+        setThrusterStartColor(rightThrusterParticleSystem, turboColor);
+        setThrusterStartColor(middleThrusterParticleSystem, turboColor);
     }
     private void Lander_OnOutOfFuel(object sender, EventArgs e)
     {
