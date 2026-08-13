@@ -29,8 +29,8 @@ public class Lander : MonoBehaviour
     // Lander stats
     private float FUEL_THRESHOLD = 20f; // Umbral para emitir evento de low fuel
     private float TURBO_THRESHOLD = 5f; // Umbral para emitir evento de low turbo
-    [SerializeField] private float STARTING_FUEL = 75f;
-    [SerializeField] private float STARTING_TURBO = 20f;
+    [SerializeField] private float STARTING_FUEL;
+    [SerializeField] private float STARTING_TURBO;
 
     // Consumo de recursos
     [SerializeField] private float TURBO_CONSUMPTION_RATE = 5f;

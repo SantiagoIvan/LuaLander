@@ -11,8 +11,6 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speedX;
     [SerializeField] private TextMeshProUGUI speedY;
     [SerializeField] private TextMeshProUGUI time;
-    [SerializeField] private Image fuelBar;
-    [SerializeField] private LowFuelUI lowFuelUI;
     private Lander lander;
 
     // Para las flechitas
@@ -20,16 +18,14 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private GameObject leftArrowGameObject;
     [SerializeField] private GameObject rightArrowGameObject;
     [SerializeField] private GameObject downArrowGameObject;
+    
     [SerializeField] private Animator animator;
-    private static readonly int IsFuelLowHash = Animator.StringToHash("IsFuelLow");
     private static readonly int IsTimeLowHash = Animator.StringToHash("IsTimeLow");
 
     private void Start()
     {
         lander = Lander.Instance;
         level.text = GameManager.getCurrentLevel().ToString();
-        lander.OnLowFuel += Lander_OnLowFuel;
-        lander.OnLowTurbo += Lander_OnLowTurbo;
         GameManager.Instance.OnLowTime += GameManager_OnLowTime;
     }
 
@@ -54,30 +50,13 @@ public class StatsUI : MonoBehaviour
         downArrowGameObject.SetActive(yspeed < 0f);
         speedX.text = xspeed.ToString("F2");
         speedY.text = yspeed.ToString("F2");
-        
-        // Actualizar el fuel
-        fuelBar.fillAmount = lander.getFuelAmount() / lander.getMaxFuelAmount();
 
         // Actualizar el tiempo
         time.text = GameManager.Instance.getTime().ToString("F0");
-
-        // Actualiza el turbo
-        // turboBar
-
-        animator.SetBool(IsFuelLowHash, lander.isFuelLow());
-        // falta el animator del turbo
-    }
-    private void Lander_OnLowFuel(object sender, EventArgs e)
-    {
-        animator.SetBool(IsFuelLowHash, lander.isFuelLow());
     }
     private void GameManager_OnLowTime(object sender, EventArgs e)
     {
         Debug.Log("Gametime is low");
-        animator.SetBool(IsTimeLowHash, true); // TODO Corregir animator porque solo puede estar este o el fuelBar animado. Tal vez hay que separar en animators
-    }
-    private void Lander_OnLowTurbo(object sender, EventArgs e)
-    {
-        Debug.Log("Turbo level: " + lander.getTurboAmount());
+        animator.SetBool(IsTimeLowHash, true);
     }
 }
