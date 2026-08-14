@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
-public class CoinVisual : MonoBehaviour
+public class CoinVisual : PickupableVisual
 {
     [SerializeField] private TextMeshPro indicatorTextMeshPro;
     [SerializeField] private GameObject indicatorGameObject;
@@ -15,28 +15,19 @@ public class CoinVisual : MonoBehaviour
     // Para las animaciones
     [SerializeField] private Animator animator; // Animator del sprite (el que tiene el material SpriteFlash)
 
-    private Coin coin;
-
-    private void Awake()
+    override protected void Awake()
     {
-        coin = GetComponent<Coin>();
-        if (coin == null)
-        {
-            Debug.LogError("Coin component not found on the GameObject.");
-            return;
-        }
-        // Subscribe to the OnPicked event
-        indicatorTextMeshPro.text = $"+{coin.getValue()}";
-        coin.OnPicked += Coin_OnPicked;
-        this.HideText(); // Hide the indicator text initially
+        base.Awake();
+        indicatorTextMeshPro.text = $"+{pickupable.getAmount()}";
         float randomInterval = UnityEngine.Random.Range(this.minTriggerInterval, this.maxTriggerInterval);
         this.periodicFunction = PeriodicFunction.Create(
             () => AnimatorTriggerExtensions.SetTrigger(animator, AnimatorTrigger.Flash)
             , randomInterval
          );
+        this.HideText(); // Hide the indicator text initially
     }
 
-    private void Coin_OnPicked(object sender, EventArgs e)
+    override protected void Pickupable_OnPickedUp(object sender, EventArgs e)
     {
         // Update the indicator text with the coin's value
         if (indicatorTextMeshPro != null)

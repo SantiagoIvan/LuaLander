@@ -208,22 +208,22 @@ public class Lander : MonoBehaviour
         {
             fuelMeter.Add(fuel.getAmount());
             Debug.Log("Fuel collected! New fuel level: " + fuelMeter.GetAmount());
-            fuel.getConsumed();
+            fuel.getPickedUp();
             OnFuelCollected?.Invoke(this, new OnFuelCollectedEventArgs { landerFuelUpdated = fuelMeter.GetAmount() });
         }
         if (other.gameObject.TryGetComponent<Turbo>(out Turbo turbo))
         {
             turboMeter.Add(turbo.getAmount());
             Debug.Log("Turbo collected! New fuel level: " + turboMeter.GetAmount());
-            turbo.getConsumed();
+            turbo.getPickedUp();
             OnTurboCollected?.Invoke(this, EventArgs.Empty);
         }
         if (other.gameObject.TryGetComponent<Coin>(out Coin coin))
         {
-            Debug.Log("Coin collected!");
             // You can add coin collection logic here
-            OnCoinCollected?.Invoke(this, new OnCoinCollectedEventArgs(coin.getValue())); // O puedo directamente hablarle al gamemanager para que sume puntos.
-            coin.getCollected();
+            OnCoinCollected?.Invoke(this, new OnCoinCollectedEventArgs((int)coin.getAmount())); // O puedo directamente hablarle al gamemanager para que sume puntos.
+            coin.getPickedUp();
+            Debug.Log("Coin collected!");
         }
     }
     public float getFuelAmount()

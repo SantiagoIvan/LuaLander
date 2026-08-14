@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
     private void Lander_OnCoinCollected(object sender, OnCoinCollectedEventArgs coin)
     {
         this.addScore(coin.coinValue);
+        Debug.Log("score updated to: " + score);
     }
 
     private void Lander_OnStateChanged(object sender, OnStateChangedEventArgs state)

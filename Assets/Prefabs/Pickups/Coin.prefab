@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d85786499607874ab4e71d022a25c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  value: 10
+  amount: 10
 --- !u!61 &1725203913451208035
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3c78858cffaa241ae34a6cc99a2962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinVisual
+  pickupable: {fileID: 8416024379757968922}
+  pickUpEffect: {fileID: 0}
   indicatorTextMeshPro: {fileID: 5384590530122860649}
   indicatorGameObject: {fileID: 7059685050549848517}
   INDICATOR_MIN_Z_ROTATION: -30

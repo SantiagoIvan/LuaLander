@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b888216e311c0424cb0bb78978ffdf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Turbo
-  amount: 10
+  amount: 8
 --- !u!114 &4225480405891997481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,9 +402,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c660526a44b11a4c985389219d8b093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurboVisual
-  amountIndicator: {fileID: 5237356335034685547}
-  turbo: {fileID: 423259024206094867}
+  pickupable: {fileID: 423259024206094867}
   pickUpEffect: {fileID: 0}
+  amountIndicator: {fileID: 5237356335034685547}
   animator: {fileID: 8030817293264310933}
 --- !u!95 &8030817293264310933 stripped
 Animator:
