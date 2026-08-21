@@ -45,6 +45,7 @@ public class Lander : MonoBehaviour
     [SerializeField] private float NORMAL_GRAVITY_SCALE = 1f;
     [SerializeField] private float PAD_MOVEMENT_THRESHOLD = 0.4f; // Umbral para considerar que el pad de movimiento esta siendo presionado
     [SerializeField] private float TURBO_SPEED_MULTIPLIER = 3f;
+    private float timeOnTriggerArea = 0f; // Tiempo que estas sobre el triggerArea para agarrar objetos, como llaves o cajas que se agarran OnTriggerEnter2D.
 
     // Fuel y Turbo comparten exactamente la misma logica (amount/max/threshold + OnLow/OnOutOf).
     // Se maneja con ResourceMeter para no duplicar esa logica dos veces.
@@ -299,5 +300,23 @@ public class Lander : MonoBehaviour
     private void GameManager_OnTimeOut(object sender, EventArgs e)
     {
         this.failLanding(LandingResult.TimeOut);
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        this.timeOnTriggerArea += Time.deltaTime;
+        if(other.gameObject.TryGetComponent<PickUpArea>(out PickUpArea pickUpArea))
+        {
+            pickUpArea.onTriggerStay2D();
+            Debug.Log("Time on trigger area: " + this.timeOnTriggerArea);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        this.timeOnTriggerArea = 0f;
+        Debug.Log("Left trigger area.");
+        if(other.gameObject.TryGetComponent<PickUpArea>(out PickUpArea pickUpArea))
+        {
+            pickUpArea.onTriggerExit2D();
+        }
     }
 }

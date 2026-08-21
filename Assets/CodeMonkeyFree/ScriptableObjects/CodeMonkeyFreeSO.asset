@@ -14,22 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1786730792
+  lastShownTimestamp: 1787235543
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1786730792
+  checkedLastUpdateTimestamp: 1787235543
   lastQOTDResponse:
-    questionId: 332
-    questionText: Which of these are affected when you modify Time.timeScale?
-    answerA: Time.deltaTime, Time.realtimeSinceStartup, Time.unscaledDeltaTime, Time.timeSinceLevelLoad,
-      Time.fixedTime
-    answerB: Time.deltaTime, Time.realtimeSinceStartup, Time.timeSinceLevelLoad,
-      Time.fixedTime
-    answerC: Time.deltaTime, Time.timeSinceLevelLoad, Time.fixedTime
+    questionId: 334
+    questionText: If you add the attribute [ExecuteInEditMode] to a MonoBehaviour
+      class, how often will Update be called?
+    answerA: Refresh rate of the monitor
+    answerB: When modifying something
+    answerC: Framerate shown in Game - Stats window
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1786730792
+  lastQotdTimestamp: 1787235543
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsSoon.png
     topText: Get 80% OFF on ALL my Courses and Games!!! (ENDS AUGUST)
@@ -37,19 +36,20 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1786730792
+  lastDynamicHeaderTimestamp: 1787235543
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1786730792
+  websiteLatestMessageTimestamp: 1787235543
   websiteLatestVideos:
     videos:
+    - youTubeId: 2QKVo8m5ozQ
+      title: The MYTH of the Overnight Game Success! ($10 mil DOESN'T happen like
+        that)
+    - youTubeId: VZCaQSzsGwU
+      title: TOP 10 FREE NEW Assets AUGUST 2026!
     - youTubeId: Hwpbh2fDPlE
       title: The SECRET WEAPON making Unity 7 AWESOME - CoreCLR Explained
     - youTubeId: xsQTCKSHte8
       title: TOP 10 NEW Games, Made with Unity! (JULY 2026)
-    - youTubeId: 26F9uHlPEO0
-      title: WHY this game made $10,000,000!
-    - youTubeId: 2oHitHMNyNw
-      title: WHY Scope Creep DESTROYS Indie Games (and how to stop it)
-  websiteLatestVideosTimestamp: 1786730792
+  websiteLatestVideosTimestamp: 1787235543

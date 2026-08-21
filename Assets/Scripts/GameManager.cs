@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameLevel> gameLevelList;
     [SerializeField] private CinemachineCameraHandler cinemachineCameraHandler;
     [SerializeField] private int testLevel = 0;
-    [SerializeField] private static float startingTime = 10f;
+    private static float startingTime = 30f;
 
 
     public event EventHandler OnTimeOut;

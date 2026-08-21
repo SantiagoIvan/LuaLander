@@ -900,6 +900,14 @@ PrefabInstance:
       propertyPath: m_Spline.m_ControlPoints.Array.data[42].m_CornerMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2915740083266551204, guid: 5b4396e4ddf9c544badf00a9d277bd7d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915740083266551204, guid: 5b4396e4ddf9c544badf00a9d277bd7d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.23
+      objectReference: {fileID: 0}
     - target: {fileID: 3878056045752337070, guid: 5b4396e4ddf9c544badf00a9d277bd7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.09
