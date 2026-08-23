@@ -130,7 +130,7 @@ public class Lander : MonoBehaviour
                     this.consumeFuel();
                 }
                 // Solo voy a consumir turbo si se presiono la tecla de turbo y la fecha para adelante. No voy a aplicar turbo en las rotaciones.
-                if (GameInput.Instance.isLanderTurboActionPressed() && GameInput.Instance.isUpActionPressed())
+                if (GameInput.Instance.isLanderTurboActionPressed() && GameInput.Instance.isUpActionPressed() && this.getTurboAmount() > 0)
                 {
                     this.consumeTurbo();
                     currentSpeedMultiplier = TURBO_SPEED_MULTIPLIER;
