@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 496d3e5e780e25a45aa9b2caebfd5a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StayToPickup
-  amount: 0
+  reward: {fileID: 0}
   timeToPickup: 2
 --- !u!114 &2038991878604277577
 MonoBehaviour:

@@ -337,9 +337,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3740465137172310010, guid: 617021886f98c844bac864ab73617fcb, type: 3}
+      propertyPath: reward
+      value: 
+      objectReference: {fileID: 423259024206094867}
     m_RemovedComponents:
     - {fileID: 7804349563960059657, guid: 617021886f98c844bac864ab73617fcb, type: 3}
     - {fileID: 3988686813301275794, guid: 617021886f98c844bac864ab73617fcb, type: 3}
+    - {fileID: 8301910447814749268, guid: 617021886f98c844bac864ab73617fcb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2754850775547179204, guid: 617021886f98c844bac864ab73617fcb, type: 3}
@@ -372,6 +377,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshPro
+--- !u!114 &6186911321394561185 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3740465137172310010, guid: 617021886f98c844bac864ab73617fcb, type: 3}
+  m_PrefabInstance: {fileID: 7364685186425136987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724907428942469394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c59ff6eab7a494abf07daf9b9df9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable
 --- !u!1 &7724907428942469394 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 937026111271337545, guid: 617021886f98c844bac864ab73617fcb, type: 3}
@@ -402,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c660526a44b11a4c985389219d8b093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurboVisual
-  pickupable: {fileID: 423259024206094867}
+  pickupable: {fileID: 6186911321394561185}
   pickUpEffect: {fileID: 0}
   amountIndicator: {fileID: 5237356335034685547}
   animator: {fileID: 8030817293264310933}

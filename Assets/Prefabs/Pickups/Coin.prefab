@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2818431447352660903}
   - component: {fileID: 8416024379757968922}
   - component: {fileID: 1725203913451208035}
-  - component: {fileID: 5815145526256281969}
   - component: {fileID: 446764047764919637}
+  - component: {fileID: 3747952742707172277}
+  - component: {fileID: 8821368471928103696}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 684792723903885048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d85786499607874ab4e71d022a25c6e, type: 3}
+  m_Script: {fileID: 11500000, guid: e19db855bd1fe384ebd79eeda89b332a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
   amount: 10
@@ -96,25 +97,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.71487534, y: 0.7368078}
   m_EdgeRadius: 0
---- !u!114 &5815145526256281969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684792723903885048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e3c78858cffaa241ae34a6cc99a2962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinVisual
-  pickupable: {fileID: 8416024379757968922}
-  pickUpEffect: {fileID: 0}
-  indicatorTextMeshPro: {fileID: 5384590530122860649}
-  indicatorGameObject: {fileID: 7059685050549848517}
-  INDICATOR_MIN_Z_ROTATION: -30
-  INDICATOR_MAX_Z_ROTATION: 30
-  animator: {fileID: 446764047764919637}
 --- !u!95 &446764047764919637
 Animator:
   serializedVersion: 7
@@ -137,6 +119,39 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3747952742707172277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684792723903885048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e3c78858cffaa241ae34a6cc99a2962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinVisual
+  pickupable: {fileID: 8821368471928103696}
+  pickUpEffect: {fileID: 0}
+  indicatorTextMeshPro: {fileID: 5384590530122860649}
+  indicatorGameObject: {fileID: 7059685050549848517}
+  INDICATOR_MIN_Z_ROTATION: -30
+  INDICATOR_MAX_Z_ROTATION: 30
+  animator: {fileID: 446764047764919637}
+--- !u!114 &8821368471928103696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684792723903885048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c59ff6eab7a494abf07daf9b9df9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable
+  reward: {fileID: 8416024379757968922}
+  destroyDelay: 0.5
 --- !u!1 &2448715036204447661
 GameObject:
   m_ObjectHideFlags: 0

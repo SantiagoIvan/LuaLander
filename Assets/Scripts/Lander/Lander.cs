@@ -205,27 +205,28 @@ public class Lander : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.TryGetComponent<Fuel>(out Fuel fuel))
+        if(other.gameObject.TryGetComponent<PickUpArea>(out PickUpArea pickUpArea))
         {
-            fuelMeter.Add(fuel.getAmount());
-            Debug.Log("Fuel collected! New fuel level: " + fuelMeter.GetAmount());
-            fuel.getPickedUp();
-            OnFuelCollected?.Invoke(this, new OnFuelCollectedEventArgs { landerFuelUpdated = fuelMeter.GetAmount() });
+            Debug.Log("Entered on pickedUpArea.");
+            return;
         }
-        if (other.gameObject.TryGetComponent<Turbo>(out Turbo turbo))
+        if (other.gameObject.TryGetComponent<Pickupable>(out Pickupable pickupable))
         {
-            turboMeter.Add(turbo.getAmount());
-            Debug.Log("Turbo collected! New fuel level: " + turboMeter.GetAmount());
-            turbo.getPickedUp();
-            OnTurboCollected?.Invoke(this, EventArgs.Empty);
+            Debug.Log("PickedUpSomething.");
+            pickupable.getPickedUp();
         }
-        if (other.gameObject.TryGetComponent<Coin>(out Coin coin))
-        {
-            // You can add coin collection logic here
-            OnCoinCollected?.Invoke(this, new OnCoinCollectedEventArgs((int)coin.getAmount())); // O puedo directamente hablarle al gamemanager para que sume puntos.
-            coin.getPickedUp();
-            Debug.Log("Coin collected!");
-        }
+    }
+    public void RaiseOnCoinCollectedEvent(int amount)
+    {
+        OnCoinCollected?.Invoke(this, new OnCoinCollectedEventArgs(amount));
+    }
+    public void RaiseOnTurboCollectedEvent()
+    {
+        OnTurboCollected?.Invoke(this, EventArgs.Empty);
+    }
+    public void RaiseOnFuelCollectedEvent()
+    {
+        OnFuelCollected?.Invoke(this, new OnFuelCollectedEventArgs { landerFuelUpdated = fuelMeter.GetAmount() });
     }
     public float getFuelAmount()
     {

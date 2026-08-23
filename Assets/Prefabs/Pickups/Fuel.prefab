@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2754850775547179204}
-  - component: {fileID: 3988686813301275794}
   - component: {fileID: 7804349563960059657}
   - component: {fileID: 7575308720331217948}
   - component: {fileID: 668696511632569806}
+  - component: {fileID: 3740465137172310010}
+  - component: {fileID: 8301910447814749268}
   m_Layer: 0
   m_Name: Fuel
   m_TagString: Untagged
@@ -37,19 +38,6 @@ Transform:
   - {fileID: 3483230257389444827}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3988686813301275794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937026111271337545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c0f4a88098a74b4da457d9887e33a66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fuel
-  amount: 50
 --- !u!114 &7804349563960059657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63b583049688c649b8a5be78dc0c7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FuelVisual
-  pickupable: {fileID: 3988686813301275794}
+  pickupable: {fileID: 3740465137172310010}
   pickUpEffect: {fileID: 0}
   amountIndicator: {fileID: 3358082228773060400}
   animator: {fileID: 668696511632569806}
@@ -134,6 +122,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3740465137172310010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937026111271337545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c59ff6eab7a494abf07daf9b9df9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable
+  reward: {fileID: 8301910447814749268}
+  destroyDelay: 0
+--- !u!114 &8301910447814749268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937026111271337545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0f4a88098a74b4da457d9887e33a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fuel
+  amount: 50
 --- !u!1 &2604453653118183222
 GameObject:
   m_ObjectHideFlags: 0

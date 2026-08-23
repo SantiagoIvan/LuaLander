@@ -1,15 +1,16 @@
 using UnityEngine;
 using System;
 
-public abstract class Pickupable : MonoBehaviour
+public class Pickupable : MonoBehaviour
 {
-    [SerializeField] protected float amount;
-    protected float destroyDelay = 0;
+    [SerializeField] protected PickUpReward reward;
+    [SerializeField] protected float destroyDelay = 0;
     public event EventHandler OnPickedUp;
 
-    public float getAmount() => amount;
+    public float getAmount() => this.reward.getAmount();
     public virtual void getPickedUp()
     {
+        reward?.getCollected();
         RaiseOnPickedUp();
         destroySelf();
     }
