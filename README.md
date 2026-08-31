@@ -41,12 +41,14 @@ Esto evita la explosion de subclases que tendriamos si cada combinacion de "tipo
 
 ### Como agregar un nuevo pickup
 
-1. Crear el Prefab (o un Prefab Variant de uno existente si solo cambia el sprite, como se hizo para la llave a partir de `PickUpArea`).
-2. Agregarle el componente `Pickupable` (si se recolecta al tocarlo) o `PickUpArea` (si hay que quedarse encima un tiempo).
-3. Agregar al mismo GameObject un componente de recompensa que herede de `PickUpReward`. Si ya existe uno que sirva (`Fuel`, `Turbo`, `Coin`, `Key`), reutilizarlo. Si no, crear una clase nueva heredando de `PickUpReward` e implementar `apply()`.
-4. Arrastrar ese componente de recompensa al campo `reward` del `Pickupable`/`PickUpArea` en el Inspector.
-5. Configurar el `amount` deseado en el Inspector del componente de recompensa.
-6. (Opcional) Agregarle una visual heredando de `PickupableVisual` o `PickUpAreaVisual` solo si necesita particulas/animacion especifica al recolectarse — si no, no hace falta subclasificar nada.
+1. Si es un pickup de area (tipo "quedate parado encima"), no armar uno desde cero: hay un prefab **`PickUpArea`** generico en `Assets/Prefabs/Pickups/` pensado como base. Crear un **Prefab Variant** a partir de el (ej. `PickUpAreaCoin`, `PickUpAreaKey`).
+2. El prefab `PickUpArea` ya trae un GameObject hijo vacio llamado **"Reward"** — ese es el placeholder pensado para colgar la recompensa. En el Variant, seleccionar ese hijo "Reward" y agregarle el componente del tipo de recompensa que corresponda (`Coin`, `Fuel`, `Turbo`, `Key`, o uno nuevo si no existe todavia).
+3. Seleccionar el GameObject padre (el que tiene el componente `PickUpArea`) y arrastrar el componente de recompensa que acabas de agregar al hijo "Reward" hacia el campo **`PickUpArea` → `Reward`** en el Inspector, para que apunte a el.
+4. Configurar el `amount` deseado en el Inspector de ese componente de recompensa.
+5. (Opcional) En el hijo "Reward" tambien se puede sumar cosas puramente visuales sin logica — por ejemplo en `PickUpAreaCoin` hay un sprite de icono y un texto TMP con el monto, ademas del componente `Coin`.
+6. Si en cambio es un pickup instantaneo (se recolecta al tocarlo, sin esperar), el mismo patron aplica pero con `Pickupable` en vez de `PickUpArea`: agregarle el componente de recompensa (puede ir en el mismo GameObject, no hace falta el hijo "Reward") y asignarlo en el campo `reward`.
+7. Si ninguna recompensa existente sirve, crear una clase nueva heredando de `PickUpReward` e implementar `apply()` — no hace falta tocar `Pickupable` ni `PickUpArea` para esto.
+8. (Opcional) Agregarle una visual heredando de `PickupableVisual` o `PickUpAreaVisual` solo si necesita particulas/animacion especifica al recolectarse — si no, no hace falta subclasificar nada.
 
 ## CameraShake
 Cuando te moris la camara hace una vibracion re zarpada

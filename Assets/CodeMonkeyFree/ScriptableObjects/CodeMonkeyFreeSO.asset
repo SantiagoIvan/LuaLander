@@ -14,23 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1787505509
+  lastShownTimestamp: 1788142639
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1787505509
+  checkedLastUpdateTimestamp: 1788142640
   lastQOTDResponse:
-    questionId: 335
-    questionText: What is the difference between Application.dataPath and Application.persistentDataPath
-      on Windows?
-    answerA: No difference on Windows
-    answerB: Application.dataPath is the install folder and Application.persistentDataPath
-      is on the Registry
-    answerC: Application.dataPath is the install folder and Application.persistentDataPath
-      is on the User Data
-    answerD: 
+    questionId: 337
+    questionText: Which namespace do we need to use File.WriteAllText()?
+    answerA: using System;
+    answerB: using UnityEngine;
+    answerC: using System.IO;
+    answerD: using UnityEngine.UI;
     answerE: 
-  lastQotdTimestamp: 1787505509
+  lastQotdTimestamp: 1788142640
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsSoon.png
     topText: Get 80% OFF on ALL my Courses and Games!!! (ENDS AUGUST)
@@ -38,11 +35,11 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1787505509
+  lastDynamicHeaderTimestamp: 1788142640
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1787505509
+  websiteLatestMessageTimestamp: 1788142640
   websiteLatestVideos:
     videos:
     - youTubeId: 2QKVo8m5ozQ
@@ -54,4 +51,4 @@ MonoBehaviour:
       title: The SECRET WEAPON making Unity 7 AWESOME - CoreCLR Explained
     - youTubeId: xsQTCKSHte8
       title: TOP 10 NEW Games, Made with Unity! (JULY 2026)
-  websiteLatestVideosTimestamp: 1787505509
+  websiteLatestVideosTimestamp: 1788142640
