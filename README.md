@@ -1,6 +1,5 @@
 # 🚀🚀🚀 Lua Lander
-Juego 2D que empece con los assets de un tutorial y termine resolviendo por mi cuenta, agregando un muchas cosas nuevas.
-Consiste en estacionar la nave en una de las plataformas dentro del limite de tiempo.
+Juego 2D que consiste en estacionar la nave en una de las plataformas dentro del limite de tiempo.
 
 ## Features
 - Cuanto mas perpendicular al suelo mas despacio estaciones, mayor sera la puntuacion.
