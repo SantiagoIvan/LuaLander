@@ -19,7 +19,6 @@ public class PickUpAreaVisual : PickupableVisual
     }
     private void PickUpArea_OnAreaStay(object sender, OnAreaStayEventArgs e)
     {
-        Debug.Log("Filling circle to " + e.progress);
         progressImage.fillAmount = e.progress;
     }
     private void PickUpArea_OnAreaExit(object sender, EventArgs e)

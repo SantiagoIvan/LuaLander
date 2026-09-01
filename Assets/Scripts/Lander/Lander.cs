@@ -308,13 +308,11 @@ public class Lander : MonoBehaviour
         if(other.gameObject.TryGetComponent<PickUpArea>(out PickUpArea pickUpArea))
         {
             pickUpArea.onTriggerStay2D();
-            Debug.Log("Time on trigger area: " + this.timeOnTriggerArea);
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
         this.timeOnTriggerArea = 0f;
-        Debug.Log("Left trigger area.");
         if(other.gameObject.TryGetComponent<PickUpArea>(out PickUpArea pickUpArea))
         {
             pickUpArea.onTriggerExit2D();

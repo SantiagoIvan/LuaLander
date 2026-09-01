@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Key : PickUpReward
 {
+    [SerializeField] private ItemType type;
+
     protected override void apply()
     {
-        // Inventory.Instance.AddKey(...) cuando exista el Inventory
-        Debug.Log("Key collected!");
+        InventoryManager.Instance.AddItem(type);
     }
 }

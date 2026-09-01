@@ -20,7 +20,6 @@ public class PickUpArea : Pickupable
     private protected void RaiseOnAreaExit()
     {
         this.OnAreaExit?.Invoke(this, EventArgs.Empty);
-        Debug.Log("Raised OnExit event");
     }
     private void reset()
     {
@@ -29,7 +28,6 @@ public class PickUpArea : Pickupable
     public void onTriggerStay2D()
     {
         timer += Time.deltaTime;
-        Debug.Log("Trigger stay: " + timer);
         this.RaiseOnAreaStay();
         if (timer > timeToPickup && !isCollected)
         {
