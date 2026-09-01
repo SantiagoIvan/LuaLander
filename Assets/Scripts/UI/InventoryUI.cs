@@ -93,5 +93,13 @@ public class InventoryUI : MonoBehaviour
         Vector2 size = background.sizeDelta;
         size.y = newHeight;
         background.sizeDelta = size;
+
+        // El borde superior del Background esta anclado en el mismo punto donde arrancan
+        // los items (Anchor/Pivot Y = 1 en ambos), asi que el margen agregado en la altura
+        // solo queda abajo. Subo el Background la mitad del margen para repartirlo simetrico
+        // arriba y abajo de la columna de items.
+        Vector2 position = background.anchoredPosition;
+        position.y = backgroundMargin / 2f;
+        background.anchoredPosition = position;
     }
 }
