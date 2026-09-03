@@ -5,6 +5,7 @@ public class AsteroidGenerator : MonoBehaviour
     private float timer;
     [SerializeField] private float lowBoundaryInterval = 1f;
     [SerializeField] private float highBoundaryInterval = 3f;
+    [SerializeField] private Asteroid asteroidPrefab;
 
     private void Awake()
     {
@@ -13,12 +14,16 @@ public class AsteroidGenerator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timer -= Time.deltaTime;
         if(timer <= 0f)
         {
-            Debug.Log("Asteroid generated");
+            // Obtengo el vector2 y lo paso a 3D para instanciar el asteroide en esa posición
+            Vector2 spawnPosition = ScreenSpawnPointGenerator.Instance.GetRandomPointOutsideCamera();
+            Vector3 finalSpawnPosition = new Vector3(spawnPosition.x, spawnPosition.y, 0f);
+            Instantiate(asteroidPrefab, finalSpawnPosition, Quaternion.identity);
+            Debug.Log("Asteroid generated in " + finalSpawnPosition);
             SetRandomTimer();
         }
     }
@@ -26,5 +31,9 @@ public class AsteroidGenerator : MonoBehaviour
     private void SetRandomTimer()
     {
         timer = Random.Range(lowBoundaryInterval, highBoundaryInterval);
+    }
+    private void generateRandomSpawnPoint()
+    {
+
     }
 }

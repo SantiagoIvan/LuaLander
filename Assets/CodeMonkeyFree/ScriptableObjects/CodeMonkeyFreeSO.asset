@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1788273362
+  lastShownTimestamp: 1788360040
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1788273362
+  checkedLastUpdateTimestamp: 1788360040
   lastQOTDResponse:
     questionId: 338
     questionText: What will happen on January 19, 2038 at 03:14:07?
@@ -27,7 +27,7 @@ MonoBehaviour:
     answerC: Half-Life 3 release date
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1788273362
+  lastQotdTimestamp: 1788360040
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsSoon.png
     topText: Get 80% OFF on ALL my Courses and Games!!! (ENDS AUGUST)
@@ -35,13 +35,15 @@ MonoBehaviour:
     bottomText: DONT MISS the latest important trends, sign up for my FREE Weekly
       Newsletter!
     bottomLink: gamedevreport
-  lastDynamicHeaderTimestamp: 1788273362
+  lastDynamicHeaderTimestamp: 1788360040
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1788273362
+  websiteLatestMessageTimestamp: 1788360040
   websiteLatestVideos:
     videos:
+    - youTubeId: 8xj9IEFRgKo
+      title: THIS is how you go from BEGINNER to ADVANCED!
     - youTubeId: XJBrzk7PR4o
       title: DON'T sell your game for $100!
     - youTubeId: 2QKVo8m5ozQ
@@ -49,6 +51,4 @@ MonoBehaviour:
         that)
     - youTubeId: VZCaQSzsGwU
       title: TOP 10 FREE NEW Assets AUGUST 2026!
-    - youTubeId: Hwpbh2fDPlE
-      title: The SECRET WEAPON making Unity 7 AWESOME - CoreCLR Explained
-  websiteLatestVideosTimestamp: 1788273362
+  websiteLatestVideosTimestamp: 1788360040
