@@ -5,6 +5,7 @@ public class Asteroid : MonoBehaviour
 {
     private float speed = 1f;
     private float scale = 1f;
+    private float rotation = 1f;
     private Vector3 direction = Vector3.zero;
     [SerializeField] private Rigidbody2D rigidbody2D;
     public event EventHandler OnAsteroidCollision;
@@ -13,7 +14,11 @@ public class Asteroid : MonoBehaviour
     {
         speed = UnityEngine.Random.Range(0.5f, 10f);
         scale = UnityEngine.Random.Range(0.5f, 2f);
+        rotation = UnityEngine.Random.Range(0f, 360f);
+
         transform.localScale = new Vector3(scale, scale, scale);
+        transform.rotation = Quaternion.Euler(0, 0, rotation);
+
         // Rotate the asteroid towards ScreenSpawnPointGenerator.Instance.GetRandomPointAroundPlayer() with a random speed
         direction = (ScreenSpawnPointGenerator.Instance.GetRandomPointAroundPlayer() - (Vector2)transform.position).normalized * UnityEngine.Random.Range(0.5f, 2f);
         rigidbody2D.AddForce(direction * speed, ForceMode2D.Impulse);
