@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8544560569464101236}
   - component: {fileID: 3279459195304615466}
   - component: {fileID: 8050388182696538756}
+  - component: {fileID: 9179715957308688218}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82189d7be1f50ba48a122e49c2e46267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Asteroid
+  rigidbody2D: {fileID: 8050388182696538756}
 --- !u!61 &3279459195304615466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,6 +122,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9179715957308688218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4252424318599921147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67acec58c9c7ac447a66fca030291705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AsteroidVisual
+  asteroid: {fileID: 8544560569464101236}
+  explosionVFX: {fileID: 7313856579324620027, guid: 57a0efc4ade67d7499410405168a7997, type: 3}
 --- !u!1 &6662258054720486152
 GameObject:
   m_ObjectHideFlags: 0

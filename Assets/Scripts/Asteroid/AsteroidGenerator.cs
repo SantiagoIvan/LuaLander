@@ -32,8 +32,4 @@ public class AsteroidGenerator : MonoBehaviour
     {
         timer = Random.Range(lowBoundaryInterval, highBoundaryInterval);
     }
-    private void generateRandomSpawnPoint()
-    {
-
-    }
 }
