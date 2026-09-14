@@ -55,6 +55,7 @@ public class InventoryManager : MonoBehaviour
         }
         itemCounts[type] = currentCount - 1;
         OnItemUsed?.Invoke(this, new OnItemUsedEventArgs { itemType = type });
+        GetInventorySummary();
         return true;
     }
     public string GetInventorySummary()

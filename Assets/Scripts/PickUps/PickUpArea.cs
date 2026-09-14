@@ -1,5 +1,8 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
 public class PickUpArea : Pickupable
 {
     // Renombrados: OnTriggerStay2D/OnTriggerExit2D son los nombres que Unity usa para
@@ -11,6 +14,7 @@ public class PickUpArea : Pickupable
     [SerializeField] private float timeToPickup;
     private bool isCollected = false;
     private float timer = 0f;
+    [SerializeField] private List<Condition> conditions = new List<Condition>();
 
     private protected void RaiseOnAreaStay()
     {
@@ -27,6 +31,12 @@ public class PickUpArea : Pickupable
     }
     public void onTriggerStay2D()
     {
+        // verify conditions
+        if (conditions.Any(condition => !condition.verify()))
+        {
+            return;
+        }
+
         timer += Time.deltaTime;
         this.RaiseOnAreaStay();
         if (timer > timeToPickup && !isCollected)
